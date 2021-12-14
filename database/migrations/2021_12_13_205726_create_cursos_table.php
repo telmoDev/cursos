@@ -1,0 +1,63 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+use function Ramsey\Uuid\v1;
+
+class CreateCursosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('cursos', function (Blueprint $table) {
+            $table->id();
+            $table->string("imagen");
+            $table->string("nombre");
+            $table->string("slug");
+            $table->text("descripcion_larga");
+            $table->string("descripcion_corta");
+            $table->double("precio");
+
+
+
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('cursos_categoria_id');
+            $table->unsignedBigInteger('author_id');
+
+
+
+            $table->foreign('cursos_categoria_id')
+                ->references('id')
+                ->on('cursos_categorias')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
+
+            $table->foreign('author_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('cursos');
+    }
+}
