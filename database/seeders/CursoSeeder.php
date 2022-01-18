@@ -19,7 +19,7 @@ class CursoSeeder extends Seeder
     {
 
         $user = Categoria::create([
-            'nombre' => "general",
+            'nombre' => "General",
         ]);
         User::factory(10)->create();
         Categoria::factory(10)->create();
