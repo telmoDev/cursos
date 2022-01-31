@@ -6,15 +6,13 @@ use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class Contenido extends Model
 {
     use HasFactory;
     use CreatedUpdatedBy;
 
-    protected $table = "cursos_categorias";
+    protected $table = "cursos_contenido";
 
-    protected $fillable = [
-        "imagen",
-        "nombre"
-    ];
+    protected $fillable = ["titulo", "detalle", "recurso"];
+
 }

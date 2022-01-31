@@ -17,16 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () { return view('inicio'); });
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get("/eventos",[EventoController::class, "index"] )->name("eventos.index");
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
     Route::get('/usuarios/permisos', [PermissionController::class, 'index'])->name('usuarios.permisos');
     Route::get('/usuarios/roles', [RoleController::class, 'index'])->name('usuarios.roles');
     Route::get('/curso/{slug}', [RoleController::class, 'index'])->name('curso');
-
     Route::get("/eventos/administrar",[EventoController::class, "administrar"] )->name("eventos.administrar");
-    Route::get("/eventos",[EventoController::class, "index"] )->name("eventos.index");
 });

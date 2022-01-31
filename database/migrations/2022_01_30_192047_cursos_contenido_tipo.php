@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEventosTable extends Migration
+class CursosContenidoTipo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,15 @@ class CreateEventosTable extends Migration
      */
     public function up()
     {
-        Schema::create('eventos', function (Blueprint $table) {
+        Schema::create('cursos_contenido_tipo', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('descripcion')->nullable();
-            $table->datetime('fecha_inicio');
-            $table->datetime('fecha_fin');
-            $table->string('observacion')->nullable();
-
-            $table->unsignedBigInteger('categoria_evento_id')->nullable();
-            $table->foreign('categoria_evento_id')->references('id')->on('categoria_eventos')->onDelete('cascade');
+            $table->string("titulo");
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
-
             $table->timestamps();
         });
     }
@@ -41,6 +33,6 @@ class CreateEventosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('eventos');
+        Schema::dropIfExists('cursos_contenido_tipo');
     }
 }

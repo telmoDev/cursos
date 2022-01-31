@@ -25,7 +25,7 @@
                         <nav class="hidden  md:block">
                             <ul class="flex items-center space-x-8">
                                 <li><a class="hover:text-sky-500" href="/">Home</a></li>
-                                <li><a class="hover:text-sky-500" href="/">Eventos</a></li>
+                                <li><a class="hover:text-sky-500" href="{{ route('eventos.index') }}">Eventos</a></li>
                                 <li><a class="hover:text-sky-500" href="/">Cursos</a></li>
                                 <li><a class="hover:text-sky-500" href="/">FAQ</a></li>
                                 <li><a class="hover:text-sky-500" href="/">Contacto</a></li>

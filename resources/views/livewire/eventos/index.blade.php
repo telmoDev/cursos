@@ -67,9 +67,8 @@
                             <template x-for="(date, dateIndex) in no_of_days" :key="dateIndex">
                                 <div style="width: 14.28%; height: 120px" class="px-4 pt-2 border-r border-b relative">
                                     <div
-                                        @click="//showEventModal(date)"
                                         x-text="date"
-                                        class="inline-flex w-6 h-6 items-center justify-center cursor-pointer text-center leading-none rounded-full transition ease-in-out duration-100"
+                                        class="inline-flex w-6 h-6 items-center justify-center  text-center leading-none rounded-full transition ease-in-out duration-100"
                                         :class="{'bg-blue-500 text-white': isToday(date) == true, 'text-gray-700 hover:bg-blue-200': isToday(date) == false }"
                                     ></div>
                                     <div style="height: 80px;" class="overflow-y-auto mt-1">
@@ -89,7 +88,9 @@
                                                     'border-purple-200 text-purple-800 bg-purple-100': event.event_theme === 'purple'
                                                 }"
                                             >
-                                                <p x-text="event.event_title" class="text-sm truncate leading-tight"></p>
+                                                <p @click="showEventModal(event.event_title, event.event_descripcion, event.event_fecha_inicio, event.event_fecha_fin )" x-text="event.event_title" class="cursor-pointer text-sm truncate leading-tight"></p>
+
+
                                             </div>
                                         </template>
                                     </div>
@@ -113,39 +114,25 @@
 
                     <div class="shadow w-full rounded-lg bg-white overflow-hidden w-full block p-8">
 
-                        <h2 class="font-bold text-2xl mb-6 text-gray-800 border-b pb-2">Add Event Details</h2>
+                        <h2 class="font-bold text-2xl mb-6 text-gray-800 border-b pb-2">Evento</h2>
 
                         <div class="mb-4">
-                            <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Event title</label>
-                            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" x-model="event_title">
+                            <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Nombre</label>
+                            <p x-text="event_title" class="cursor-pointer text-sm truncate leading-tight"></p>
                         </div>
-
                         <div class="mb-4">
-                            <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Event date</label>
-                            <input class="bg-gray-200 appearance-none border-2 border-gray-200 rounded-lg w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" type="text" x-model="event_date" readonly>
+                            <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Descripción</label>
+                            <p x-text="event_descripcion" class="cursor-pointer text-sm truncate leading-tight"></p>
                         </div>
-
-                        <div class="inline-block w-64 mb-4">
-                            <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Select a theme</label>
-                            <div class="relative">
-                                <select @change="event_theme = $event.target.value;" x-model="event_theme" class="block appearance-none w-full bg-gray-200 border-2 border-gray-200 hover:border-gray-500 px-4 py-2 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-blue-500 text-gray-700">
-                                        <template x-for="(theme, index) in themes">
-                                            <option :value="theme.value" x-text="theme.label"></option>
-                                        </template>
-
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                                </div>
-                            </div>
+                        <div class="mb-4">
+                            <label class="text-gray-800 block mb-1 font-bold text-sm tracking-wide">Duración</label>
+                            <p class="cursor-pointer text-sm truncate leading-tight">Desde: <span x-text="event_fecha_inicio"></span></p>
+                            <p class="cursor-pointer text-sm truncate leading-tight">Hasta: <span x-text="event_fecha_fin"></span></p>
                         </div>
 
                         <div class="mt-8 text-right">
                             <button type="button" class="bg-white hover:bg-gray-100 text-gray-700 font-semibold py-2 px-4 border border-gray-300 rounded-lg shadow-sm mr-2" @click="openEventModal = !openEventModal">
-                                Cancel
-                            </button>
-                            <button type="button" class="bg-gray-800 hover:bg-gray-700 text-white font-semibold py-2 px-4 border border-gray-700 rounded-lg shadow-sm" @click="addEvent()">
-                                Save Event
+                                Cerrar
                             </button>
                         </div>
                     </div>
@@ -179,13 +166,18 @@
                             {
                                 event_date: new Date({{ $date->format("Y") }},{{ $date->format("n") - 1 }},{{ $date->format("j") }}),
                                 event_title: "{{ $evento->nombre }}",
-                                event_theme: 'blue'
+                                event_descripcion: "{{ $evento->descripcion }}",
+                                event_fecha_inicio: "{{ $evento->fecha_inicio }}",
+                                event_fecha_fin: "{{ $evento->fecha_fin }}",
+                                event_theme: 'blue',
                             },
                             @endforeach
                         @endforeach
                     ],
                     event_title: '',
-                    event_date: '',
+                    event_descripcion: '',
+                    event_fecha_inicio: '',
+                    event_fecha_fin: '',
                     event_theme: 'blue',
 
                     themes: [
@@ -227,32 +219,13 @@
                         return today.toDateString() === d.toDateString() ? true : false;
                     },
 
-                    showEventModal(date) {
+                    showEventModal(title, descripcion, fecha_inicio, fecha_fin) {
                         // open the modal
                         this.openEventModal = true;
-                        this.event_date = new Date(this.year, this.month, date).toDateString();
-                    },
-
-                    addEvent() {
-                        if (this.event_title == '') {
-                            return;
-                        }
-
-                        this.events.push({
-                            event_date: this.event_date,
-                            event_title: this.event_title,
-                            event_theme: this.event_theme
-                        });
-
-                        console.log(this.events);
-
-                        // clear the form data
-                        this.event_title = '';
-                        this.event_date = '';
-                        this.event_theme = 'blue';
-
-                        //close the modal
-                        this.openEventModal = false;
+                        this.event_title = title;
+                        this.event_descripcion = descripcion;
+                        this.event_fecha_inicio = fecha_inicio;
+                        this.event_fecha_fin = fecha_fin;
                     },
 
                     getNoOfDays() {
