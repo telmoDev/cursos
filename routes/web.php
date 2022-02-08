@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CursoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
@@ -18,11 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () { return view('inicio'); });
 Route::get("/eventos",[EventoController::class, "index"] )->name("eventos.index");
+Route::get('/curso/{slug}', [CursoController::class, 'index'])->name('curso');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
     Route::get('/usuarios/permisos', [PermissionController::class, 'index'])->name('usuarios.permisos');
     Route::get('/usuarios/roles', [RoleController::class, 'index'])->name('usuarios.roles');
-    Route::get('/curso/{slug}', [RoleController::class, 'index'])->name('curso');
+    // Route::get('/curso/{slug}', [RoleController::class, 'index'])->name('curso');
     Route::get("/eventos/administrar",[EventoController::class, "administrar"] )->name("eventos.administrar");
 });

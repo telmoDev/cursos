@@ -22,8 +22,8 @@ class CursosContenido extends Migration
             $table->unsignedBigInteger('cursos_contenido_tipo_id');
             $table->foreign('cursos_contenido_tipo_id')->references('id')->on('cursos_contenido_tipo')->onDelete('cascade');
 
-            $table->unsignedBigInteger('cursos_id');
-            $table->foreign('cursos_id')->references('id')->on('cursos')->onDelete('cascade');
+            $table->unsignedBigInteger('cursos_seccione_id');
+            $table->foreign('cursos_seccione_id')->references('id')->on('cursos_seccione')->onDelete('cascade');
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

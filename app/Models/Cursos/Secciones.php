@@ -14,4 +14,9 @@ class Secciones extends Model
     protected $table = "cursos_seccione";
 
     protected $fillable = ["titulo"];
+
+    public function contenido()
+    {
+        return $this->hasMany(Contenido::class,"cursos_seccione_id","id");
+    }
 }

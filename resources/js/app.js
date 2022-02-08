@@ -2,9 +2,7 @@ require('./bootstrap');
 require('./swiper-bundle.min.js')
 
 import Alpine from 'alpinejs';
-
 window.Alpine = Alpine;
-
 Alpine.start();
 
 window.Swiper = require('./swiper-bundle.min.js');
