@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Curso;
+use App\Models\Cursos\Secciones;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 

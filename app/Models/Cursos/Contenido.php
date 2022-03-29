@@ -13,6 +13,10 @@ class Contenido extends Model
 
     protected $table = "cursos_contenido";
 
-    protected $fillable = ["titulo", "detalle", "recurso"];
+    protected $fillable = ["titulo", "detalle", "recurso", 'slug'];
 
+    public function seccion()
+    {
+        return $this->hasOne(Secciones::class, 'id', 'cursos_seccione_id');
+    }
 }

@@ -35,10 +35,10 @@ class Curso extends Model
         return $this->hasOne(User::class,"id","author_id");
     }
 
-    public function getPrecioAttribute( $value )
-    {
-        return "$ " . $value;
-    }
+    // public function getPrecioAttribute( $value )
+    // {
+    //     return "$ " . $value;
+    // }
 
     public function url()
     {

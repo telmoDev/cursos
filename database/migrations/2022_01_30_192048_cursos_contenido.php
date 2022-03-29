@@ -17,6 +17,7 @@ class CursosContenido extends Migration
             $table->id();
             $table->string("titulo");
             $table->text("detalle");
+            $table->string("slug");
             $table->string("recurso")->nullable();
 
             $table->unsignedBigInteger('cursos_contenido_tipo_id');

@@ -9,6 +9,7 @@ use App\Models\Cursos\ContenidoTipo;
 use App\Models\Cursos\Destacados;
 use App\Models\Cursos\Secciones;
 use App\Models\User;
+use App\Models\Users\MisCursos;
 use Illuminate\Database\Seeder;
 
 class CursoSeeder extends Seeder
@@ -23,9 +24,7 @@ class CursoSeeder extends Seeder
 
         User::factory(10)->create();
         Categoria::factory(10)->create();
-        Curso::factory(200)->create();
-        Destacados::factory(10)->create();
-        Secciones::factory(500)->create();
+
         $new = new ContenidoTipo();
         $new->titulo = "Tipo 1";
         $new->save();
@@ -38,7 +37,40 @@ class CursoSeeder extends Seeder
         $new = new ContenidoTipo();
         $new->titulo = "Tipo 4";
         $new->save();
-        Contenido::factory(1000)->create();
+
+        Curso::factory(70)
+        ->has(
+            Secciones::factory()
+            ->has(Contenido::factory()->count(5))
+            ->count(4)
+
+        )
+        ->create();
+        Destacados::factory(10)->create();
+        // Secciones::factory(100)->create();
+
+        MisCursos::create([
+            'curso_id' => "2",
+            'user_id' => "1",
+        ]);
+
+        MisCursos::create([
+            'curso_id' => "1",
+            'user_id' => "1",
+        ]);
+
+        MisCursos::create([
+            'curso_id' => "3",
+            'user_id' => "1",
+        ]);
+
+        MisCursos::create([
+            'curso_id' => "4",
+            'user_id' => "1",
+        ]);
+
+
+        // Contenido::factory(2000)->create();
         // \App\Models\User::factory(10)->create();
     }
 }

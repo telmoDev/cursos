@@ -20,4 +20,18 @@ class CursoController extends Controller
         return view("cursos.index", compact('curso'));
     }
 
+    public function alumno(Request $request, $curso, $seccion)
+    {
+        return view("cursos.alumno", compact('curso', 'seccion'));
+    }
+
+    public function list()
+    {
+        return view("cursos.list");
+    }
+
+    public function crear()
+    {
+        return view("cursos.crear");
+    }
 }

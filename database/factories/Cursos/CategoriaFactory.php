@@ -4,6 +4,7 @@ namespace Database\Factories\Cursos;
 
 use App\Models\Cursos\Categoria;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CategoriaFactory extends Factory
 {
@@ -17,9 +18,11 @@ class CategoriaFactory extends Factory
 
     public function definition()
     {
+        $nombre = $this->faker->name();
         return [
-            'nombre' => $this->faker->name(),
-            'imagen' => $this->faker->imageUrl($width = 400, $height = 400),
+            'nombre'    => $nombre,
+            'slug'      => Str::slug( $nombre, '-'),
+            'imagen'    => $this->faker->imageUrl($width = 400, $height = 400),
         ];
     }
 }

@@ -1102,6 +1102,9 @@ select {
 .prose > :last-child {
 	margin-bottom: 0;
 }
+.pointer-events-none {
+	pointer-events: none;
+}
 .fixed {
 	position: fixed;
 }
@@ -1121,14 +1124,15 @@ select {
 	bottom: 0px;
 	left: 0px;
 }
+.inset-y-0 {
+	top: 0px;
+	bottom: 0px;
+}
 .left-0 {
 	left: 0px;
 }
 .right-0 {
 	right: 0px;
-}
-.top-0 {
-	top: 0px;
 }
 .bottom-0 {
 	bottom: 0px;
@@ -1141,6 +1145,9 @@ select {
 }
 .left-full {
 	left: 100%;
+}
+.top-0 {
+	top: 0px;
 }
 .z-0 {
 	z-index: 0;
@@ -1234,14 +1241,17 @@ select {
 .mb-4 {
 	margin-bottom: 1rem;
 }
+.mb-2 {
+	margin-bottom: 0.5rem;
+}
+.ml-10 {
+	margin-left: 2.5rem;
+}
 .mr-5 {
 	margin-right: 1.25rem;
 }
 .mb-5 {
 	margin-bottom: 1.25rem;
-}
-.mb-2 {
-	margin-bottom: 0.5rem;
 }
 .-mt-px {
 	margin-top: -1px;
@@ -1254,6 +1264,12 @@ select {
 }
 .mt-24 {
 	margin-top: 6rem;
+}
+.mr-1 {
+	margin-right: 0.25rem;
+}
+.mb-3 {
+	margin-bottom: 0.75rem;
 }
 .block {
 	display: block;
@@ -1309,6 +1325,9 @@ select {
 .h-full {
 	height: 100%;
 }
+.h-40 {
+	height: 10rem;
+}
 .min-h-screen {
 	min-height: 100vh;
 }
@@ -1354,11 +1373,23 @@ select {
 .w-20 {
 	width: 5rem;
 }
+.w-32 {
+	width: 8rem;
+}
+.w-1\/3 {
+	width: 33.333333%;
+}
 .w-4\/5 {
 	width: 80%;
 }
 .w-1\/5 {
 	width: 20%;
+}
+.w-4\/6 {
+	width: 66.666667%;
+}
+.w-2\/6 {
+	width: 33.333333%;
 }
 .w-3 {
 	width: 0.75rem;
@@ -1556,6 +1587,9 @@ select {
 .border-b {
 	border-bottom-width: 1px;
 }
+.border-l-2 {
+	border-left-width: 2px;
+}
 .border-r {
 	border-right-width: 1px;
 }
@@ -1609,6 +1643,10 @@ select {
 	--tw-border-opacity: 1;
 	border-color: rgba(221, 214, 254, var(--tw-border-opacity));
 }
+.border-l-white {
+	--tw-border-opacity: 1;
+	border-left-color: rgba(255, 255, 255, var(--tw-border-opacity));
+}
 .bg-white {
 	--tw-bg-opacity: 1;
 	background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
@@ -1661,6 +1699,10 @@ select {
 	--tw-bg-opacity: 1;
 	background-color: rgba(0, 0, 0, var(--tw-bg-opacity));
 }
+.bg-gray-400 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(156, 163, 175, var(--tw-bg-opacity));
+}
 .bg-blue-500 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(59, 130, 246, var(--tw-bg-opacity));
@@ -1684,10 +1726,6 @@ select {
 .bg-purple-100 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(237, 233, 254, var(--tw-bg-opacity));
-}
-.bg-gray-400 {
-	--tw-bg-opacity: 1;
-	background-color: rgba(156, 163, 175, var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
@@ -1722,6 +1760,9 @@ select {
 }
 .p-8 {
 	padding: 2rem;
+}
+.p-3 {
+	padding: 0.75rem;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -1813,11 +1854,20 @@ select {
 .pb-1 {
 	padding-bottom: 0.25rem;
 }
+.pb-2 {
+	padding-bottom: 0.5rem;
+}
+.pl-7 {
+	padding-left: 1.75rem;
+}
+.pr-12 {
+	padding-right: 3rem;
+}
 .pt-8 {
 	padding-top: 2rem;
 }
-.pb-2 {
-	padding-bottom: 0.5rem;
+.pr-6 {
+	padding-right: 1.5rem;
 }
 .text-left {
 	text-align: left;
@@ -1858,6 +1908,10 @@ select {
 	font-size: 1.25rem;
 	line-height: 1.75rem;
 }
+.text-3xl {
+	font-size: 1.875rem;
+	line-height: 2.25rem;
+}
 .font-medium {
 	font-weight: 500;
 }
@@ -1866,6 +1920,9 @@ select {
 }
 .font-bold {
 	font-weight: 700;
+}
+.font-thin {
+	font-weight: 100;
 }
 .font-normal {
 	font-weight: 400;
@@ -1960,6 +2017,10 @@ select {
 	--tw-text-opacity: 1;
 	color: rgba(16, 185, 129, var(--tw-text-opacity));
 }
+.text-black {
+	--tw-text-opacity: 1;
+	color: rgba(0, 0, 0, var(--tw-text-opacity));
+}
 .text-gray-200 {
 	--tw-text-opacity: 1;
 	color: rgba(229, 231, 235, var(--tw-text-opacity));
@@ -1967,10 +2028,6 @@ select {
 .text-gray-300 {
 	--tw-text-opacity: 1;
 	color: rgba(209, 213, 219, var(--tw-text-opacity));
-}
-.text-black {
-	--tw-text-opacity: 1;
-	color: rgba(0, 0, 0, var(--tw-text-opacity));
 }
 .text-blue-800 {
 	--tw-text-opacity: 1;
@@ -2301,6 +2358,10 @@ button.swiper-pagination-bullet{border:none;margin:0;padding:0;box-shadow:none;-
 .hover\:text-gray-900:hover {
 	--tw-text-opacity: 1;
 	color: rgba(17, 24, 39, var(--tw-text-opacity));
+}
+.hover\:text-white:hover {
+	--tw-text-opacity: 1;
+	color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 .focus\:z-10:focus {
 	z-index: 10;
