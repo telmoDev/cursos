@@ -5,7 +5,7 @@
             @php
                 $curso = $micurso->curso;
             @endphp
-            @include('livewire.cursos._partes.grid_curso')
+            @include('livewire.cursos._partes.grid_curso_mis_cursos')
         @endforeach
     </div>
 

@@ -20,6 +20,12 @@ class Carrito extends Component
                 'carrito' => new Collection([]),
             ]);
         }
+    }
 
+    public function eleminarCarrito($id)
+    {
+        $elemento =Carritos::where('id', $id)
+                    ->where('user_id', Auth::user()->id)->first();
+        $elemento->delete();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Cursos\Contenido;
+use App\Models\Cursos\Evaluacion;
 use App\Models\Cursos\Secciones;
 use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -48,5 +49,10 @@ class Curso extends Model
     public function secciones()
     {
         return $this->hasMany(Secciones::class,"cursos_id","id");
+    }
+
+    public function evaluacion()
+    {
+        return $this->hasMany(Evaluacion::class,"cursos_id","id");
     }
 }

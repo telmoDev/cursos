@@ -25,6 +25,7 @@ Route::get("/eventos",[EventoController::class, "index"] )->name("eventos.index"
 Route::get('/cursos', [CursoController::class, 'list'])->name('curso.list');
 Route::get('/curso/{slug}', [CursoController::class, 'index'])->name('curso');
 Route::get('/curso/{slug}/tema/{seccion}', [CursoController::class, 'alumno'])->name('curso.seccion');
+Route::get('/curso/{slug}/evaluacion', [CursoController::class, 'evaluacion'])->name('curso.evaluacion');
 
 Route::get('/tema-de-interes/{slug}', [TemaController::class, 'list'])->name('tema.list');
 

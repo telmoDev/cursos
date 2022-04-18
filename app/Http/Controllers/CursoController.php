@@ -25,6 +25,11 @@ class CursoController extends Controller
         return view("cursos.alumno", compact('curso', 'seccion'));
     }
 
+    public function evaluacion(Request $request, $curso)
+    {
+        return view("cursos.evaluacion", compact('curso'));
+    }
+
     public function list()
     {
         return view("cursos.list");
@@ -34,4 +39,5 @@ class CursoController extends Controller
     {
         return view("cursos.crear");
     }
+
 }

@@ -16,6 +16,8 @@ class Alumno extends Component
 
     public $contenido;
 
+    public $modalIntro = true;
+
     public function mount()
     {
         $this->curso = Curso::where("slug", $this->curso_slug)->first();
@@ -33,4 +35,8 @@ class Alumno extends Component
         return redirect()->route('curso.seccion' , [$this->curso_slug, $contenido_slug ] );
     }
 
+    public function modalIntroOff()
+    {
+        $this->modalIntro = false;
+    }
 }
