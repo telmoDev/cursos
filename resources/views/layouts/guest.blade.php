@@ -20,10 +20,10 @@
     </head>
     <body>
         @livewire('navigation-menu')
-        <div class="font-sans text-gray-900 antialiased">
+        <div class="font-sans text-gray-900 antialiased pt-32">
             {{ $slot }}
         </div>
-
+        @include('layouts._partes.footer')
         @livewireScripts
     </body>
 </html>

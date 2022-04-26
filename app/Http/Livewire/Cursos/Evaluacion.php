@@ -3,6 +3,9 @@
 namespace App\Http\Livewire\Cursos;
 
 use App\Models\Curso;
+use App\Models\Cursos\EvaluacionPregunta;
+use App\Models\Users\Aprobados;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Evaluacion extends Component
@@ -14,93 +17,33 @@ class Evaluacion extends Component
     public $mostrar_curso;
 
     public $contenido;
-
     public $pregunta_mostrar;
-
     public $indice;
-
     public $fin_de_curso = false;
 
-    public $preguntas_respuesta = [
-        'pregunta1' => [
-            'pregunta' => "Ejemplo pregunta 1",
-            'opciones' => [
-                "op1" => "Ejemplo respuesta 1",
-                "op2" => "Ejemplo respuesta 2",
-                "op3" => "Ejemplo respuesta 33"
-            ],
-            'solucion' => "op3",
-            'contestada' => false,
-        ],
-        'pregunta2' => [
-            'pregunta' => "Ejemplo pregunta 2",
-            'opciones' => [
-                "op1" => "Ejemplo respuesta 1",
-                "op2" => "Ejemplo respuesta 2",
-                "op3" => "Ejemplo respuesta 33"
-            ],
-            'solucion' => "op3",
-            'contestada' => false,
-        ],
-        'pregunta3' => [
-            'pregunta' => "Ejemplo pregunta 3",
-            'opciones' => [
-                "op1" => "Ejemplo respuesta 1",
-                "op2" => "Ejemplo respuesta 2",
-                "op3" => "Ejemplo respuesta 33"
-            ],
-            'solucion' => "op3",
-            'contestada' => false,
-        ],
-        'pregunta4' => [
-            'pregunta' => "Ejemplo pregunta 4",
-            'opciones' => [
-                "op1" => "Ejemplo respuesta 1",
-                "op2" => "Ejemplo respuesta 2",
-                "op3" => "Ejemplo respuesta 33"
-            ],
-            'solucion' => "op3",
-            'contestada' => false,
-        ],
-        'pregunta5' => [
-            'pregunta' => "Ejemplo pregunta 5",
-            'opciones' => [
-                "op1" => "Ejemplo respuesta 1",
-                "op2" => "Ejemplo respuesta 2",
-                "op3" => "Ejemplo respuesta 33"
-            ],
-            'solucion' => "op3",
-            'contestada' => false,
-        ],
-        'pregunta6' => [
-            'pregunta' => "Ejemplo pregunta 6",
-            'opciones' => [
-                "op1" => "Ejemplo respuesta 1",
-                "op2" => "Ejemplo respuesta 2",
-                "op3" => "Ejemplo respuesta 33"
-            ],
-            'solucion' => "op3",
-            'contestada' => false,
-        ],
-        'pregunta7' => [
-            'pregunta' => "Ejemplo pregunta 7",
-            'opciones' => [
-                "op1" => "Ejemplo respuesta 1",
-                "op2" => "Ejemplo respuesta 2",
-                "op3" => "Ejemplo respuesta 33"
-            ],
-            'solucion' => "op3",
-            'contestada' => false,
-        ],
+    public $repositorioRespuestas = [];
+
+    public $calificacion = 0;
+
+    protected $rules = [
     ];
 
     public function mount()
     {
         $this->curso = Curso::where("slug", $this->curso_slug)->first();
+        $this->pregunta_mostrar = $this->curso->evaluacion->evaluacionPregunta->random(5);
+        $this->iniciarRepoRespuestas();
+    }
 
-        $this->indice = array_key_first( $this->preguntas_respuesta );
-
-        $this->pregunta_mostrar = $this->preguntas_respuesta[$this->indice];
+    public function iniciarRepoRespuestas()
+    {
+        foreach ($this->pregunta_mostrar as $key => $pregunta) {
+            $this->repositorioRespuestas[] = [
+                'id_preg' => $pregunta->id,
+                'respuestas' => '',
+                'contestada' => false,
+            ];
+        }
     }
 
     public function render()
@@ -113,37 +56,51 @@ class Evaluacion extends Component
         return redirect()->route('curso.seccion' , [$this->curso_slug, $contenido_slug ] );
     }
 
-    public function pregunta_select( $indice )
+    public function respuestas( $key, $id_curso, $id_respuesta )
     {
-        $this->pregunta_mostrar = $this->preguntas_respuesta[$indice];
+        $this->repositorioRespuestas[$key]['respuestas'] = $id_respuesta;
+        $this->repositorioRespuestas[$key]['id_curso'] = $id_curso;
+        $this->repositorioRespuestas[$key]['contestada'] = true;
     }
 
-    public function siguiente( )
+    public function enviar()
     {
-        if( $this->siguienteKeyPregunta() != -1 ){
-            $this->pregunta_mostrar = $this->preguntas_respuesta[ $this->indice ];
-        }
-        //
-    }
-
-    public function siguienteKeyPregunta()
-    {
-        $indices = array_keys( $this->preguntas_respuesta );
-        foreach ( $indices as $key => $indices_key) {
-
-            if( $indices_key == $this->indice){
-                if( count( $indices ) != $key + 1){
-                    $this->indice = $indices[ $key + 1 ];
-                    $this->preguntas_respuesta[$indices[$key]]['contestada'] = true;
-                    return $indices[ $key + 1 ];
-                }else{
-                    if( count( $indices ) == $key + 1){
-                        $this->preguntas_respuesta[$indices[$key]]['contestada'] = true;
+        $respuestas_correctas = 0;
+        foreach($this->repositorioRespuestas as $key => $preguntas) {
+            if( $preguntas['respuestas'] != "" ){
+                    $resp = EvaluacionPregunta::where('curso_evaluacion_id', $this->curso->evaluacion->id)
+                                            ->where('respuesta_correcta_id', $preguntas['respuestas']  )
+                            ->count();
+                    if( $resp > 0 ){
+                        $respuestas_correctas = $respuestas_correctas + 1;
                     }
-                    $this->fin_de_curso = true;
+            }
+        }
+        $this->calificacion = $respuestas_correctas / ( count($this->repositorioRespuestas) ) * 100;
+        if( $this->calificacion > 80 ){
+            $this->aprobarSiguiente();
+        }
+    }
+    public function aprobarSiguiente()
+    {
+        if( Auth::check() ){
+            $user = Auth::user()->id;
+            foreach ($this->curso->secciones as $key => $seccion) {
+                $cantidad = Aprobados::where('curso_id', $this->curso->id)
+                            ->where('user_id', $user)
+                            ->where('cursos_seccione_id', $seccion->id)
+                            ->count();
+                if( $cantidad == 0 ){
+                    Aprobados::updateOrCreate(
+                        [
+                            'curso_id' => $this->curso->id,
+                            'user_id' => $user,
+                            'cursos_seccione_id' => $seccion->id,
+                        ]
+                    );
+                    return;
                 }
             }
         }
-        return -1;
     }
 }

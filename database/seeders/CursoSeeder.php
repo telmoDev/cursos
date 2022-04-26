@@ -49,20 +49,25 @@ class CursoSeeder extends Seeder
             ->count(4)
         )
         ->has(
-            Evaluacion::factory()->count(6)
+            Evaluacion::factory()
             ->has(
                 EvaluacionPregunta::factory()
                 ->has(
                     EvaluacionRespuesta::factory()
                     ->count(6)
                 )
-                ->count(6)
-            )
+                ->count(10)
+            )->count(1)
 
         )
         ->create();
         Destacados::factory(10)->create();
         // Secciones::factory(100)->create();
+
+        foreach (EvaluacionPregunta::all() as $key => $pregunta) {
+            $pregunta->respuesta_correcta_id = $pregunta->evaluacionRespuesta->get(2)->id;
+            $pregunta->save();
+        }
 
         $miscurso = MisCursos::create([
             'curso_id' => "2",
@@ -114,5 +119,53 @@ class CursoSeeder extends Seeder
 
         // Contenido::factory(2000)->create();
         // \App\Models\User::factory(10)->create();
+
+
+
+        $miscurso = MisCursos::create([
+            'curso_id' => "2",
+            'user_id' => "2",
+        ]);
+
+        Aprobados::create([
+            'curso_id' => "2",
+            'user_id' => "2",
+            'cursos_seccione_id' => $miscurso->curso->secciones->first()->id,
+        ]);
+
+
+        $miscurso = MisCursos::create([
+            'curso_id' => "1",
+            'user_id' => "2",
+        ]);
+
+
+        Aprobados::create([
+            'curso_id' => "1",
+            'user_id' => "2",
+            'cursos_seccione_id' => $miscurso->curso->secciones->first()->id,
+        ]);
+
+        $miscurso = MisCursos::create([
+            'curso_id' => "3",
+            'user_id' => "2",
+        ]);
+
+        Aprobados::create([
+            'curso_id' => "3",
+            'user_id' => "2",
+            'cursos_seccione_id' => $miscurso->curso->secciones->first()->id,
+        ]);
+
+        $miscurso = MisCursos::create([
+            'curso_id' => "4",
+            'user_id' => "2",
+        ]);
+
+        Aprobados::create([
+            'curso_id' => "4",
+            'user_id' => "2",
+            'cursos_seccione_id' => $miscurso->curso->secciones->first()->id,
+        ]);
     }
 }

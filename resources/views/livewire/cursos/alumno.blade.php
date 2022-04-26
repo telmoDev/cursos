@@ -1,6 +1,6 @@
 <div
     x-data="{ scroll: (elemento) => { avance = document.getElementsByTagName('header')[0].offsetHeight + ( window.innerHeight * elemento );console.log(avance);window.scrollTo({top: avance, behavior: 'smooth'}); }}"
-    x-init="scroll(0)"
+
 >
     <div class=""
     >

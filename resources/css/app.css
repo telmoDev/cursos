@@ -4,10 +4,24 @@
 
 @import './swiper/swiper-bundle.min.css';
 
+@font-face {
+    font-family: 'Acephimere';
+    src: url('../fonts/Acephimere/Acephimere.eot');
+    src: url('../fonts/Acephimere/Acephimere.eot') format('embedded-opentype'),
+         url('../fonts/Acephimere/Acephimere.woff2') format('woff2'),
+         url('../fonts/Acephimere/Acephimere.woff') format('woff'),
+         url('../fonts/Acephimere/Acephimere.ttf') format('truetype'),
+         url('../fonts/Acephimere/Acephimere.svg#Acephimere') format('svg');
+}
+
 
 .slider-principal{
     width: 1100px;
     height: 300px;
+}
+
+.font-acephimere{
+    font-family: 'Acephimere';
 }
 
 .slider-principal .swiper-slide{
@@ -44,3 +58,39 @@
     background: -ms-linear-gradient(left,rgba(38,91,145,1) 0%,rgba(74,173,82,1) 100%);
     background: linear-gradient(to right,rgba(38,91,145,1) 0%,rgba(74,173,82,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#265b91',endColorstr='#4aad52',GradientType=1);color: #fff;}
+
+.ec{position:relative}.ec .ec__holder{overflow:hidden}.ec .ec__track{will-change:transform}.ec .ec__track:after{content:'';display:table;clear:both}.ec .ec__item{float:left;overflow:hidden}.ec .ec__pagination{text-align:center;margin-top:10px}.ec .ec__pagination .pagination__dot{width:8px;height:8px;background-color:transparent;display:inline-block;border:1px solid #000;margin:0 5px;border-radius:50%;cursor:pointer}.ec .ec__pagination .pagination__dot--active{background-color:#000}.ec .ec__nav{position:absolute;bottom:10px;border-top:2px solid #000;border-right:2px solid #000;width:8px;height:8px;cursor:pointer}.ec .ec__nav:before{content:''}.ec .ec__nav--prev{transform:rotate(-135deg);left:1em}.ec .ec__nav--next{transform:rotate(45deg);right:1em}
+
+
+.carousel {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    padding: .5em;
+  }
+  .example-box {
+    margin-bottom: 50px;
+    /* box-shadow: 0 2px 5px rgba(0,0,0,.4); */
+    padding: 1em;
+    border-radius: 12px;
+    border: 1px solid #DFDFDF;
+  }
+  .example-box h2 {
+    margin: 0 0 20px !important;
+  }
+  .box {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom right, #2193b0, #6dd5ed);
+    border: 3px solid #FFF;
+    border-radius: 8px;
+    color: #FFF;
+    font-size: 26px;
+  }

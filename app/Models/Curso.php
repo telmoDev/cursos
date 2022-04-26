@@ -28,7 +28,7 @@ class Curso extends Model
 
     public function imagen()
     {
-        return "https://picsum.photos/id/" . $this->id ."/200/300";
+        return "/img/cursos/" . $this->imagen;
     }
 
     public function autor()
@@ -53,6 +53,6 @@ class Curso extends Model
 
     public function evaluacion()
     {
-        return $this->hasMany(Evaluacion::class,"cursos_id","id");
+        return $this->hasOne(Evaluacion::class,"cursos_id","id");
     }
 }

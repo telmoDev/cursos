@@ -15,7 +15,7 @@
                         @if( $this->Aprobado($seccion) )
                             {{-- Auth   --}}
                             <div class="relative">
-                                <a href="{{ route('curso.seccion' , [$curso->slug, $seccion->contenido->first()->slug ])}}" class="block w-full h-64 bg-center" style="background-image: url(https://picsum.photos/id/{{ ( $curso->id + 30) + ( $key * 2 ) }}/200/300)"></a>
+                                <a href="{{ route('curso.seccion' , [$curso->slug, $seccion->contenido->first()->slug ])}}" class="block w-full h-64 bg-center bg-cover" style="background-image: url(https://picsum.photos/id/{{ ( $curso->id + 30) + ( $key * 2 ) }}/200/300)"></a>
                                 <a href="{{ route('curso.seccion' , [$curso->slug, $seccion->contenido->first()->slug ])}}">{{ $seccion->titulo }}</a>
                                 <div class=""><span class="text-xs">Número de contenido: {{ $seccion->contenido->count() }}</span></div>
                             </div>

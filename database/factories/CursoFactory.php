@@ -22,7 +22,7 @@ class CursoFactory extends Factory
     {
         $titulo = $this->faker->name();
         return [
-            'imagen' => $this->faker->imageUrl($width = 300, $height = 300),
+            'imagen' => "imagen_curso-1.jpg",//$this->faker->imageUrl($width = 300, $height = 300),
             'nombre' => $titulo,
             'slug'  => Str::slug( $titulo , '-'),
             'descripcion_larga' => $this->faker->realText($maxNbChars = 200,),

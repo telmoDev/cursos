@@ -33,10 +33,13 @@ class Index extends Component
 
     public function Aprobado( $id_seccion )
     {
-        $id_user = Auth::user()->id;
-        return Aprobados::where('curso_id', $this->curso->id )
-        ->where('user_id', $id_user )
-        ->where('cursos_seccione_id', $id_seccion->id )
-        ->exists();
+        if( Auth::check() ){
+            $id_user = Auth::user()->id;
+            return Aprobados::where('curso_id', $this->curso->id )
+            ->where('user_id', $id_user )
+            ->where('cursos_seccione_id', $id_seccion->id )
+            ->exists();
+        }
+        return false;
     }
 }

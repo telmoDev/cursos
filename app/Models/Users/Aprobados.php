@@ -9,5 +9,11 @@ class Aprobados extends Model
 {
     use HasFactory;
 
-    protected $table = "user_mis_cursos_contenido_curso_aprobado";
+    protected $table = "curso_aprobado";
+
+    protected $fillable = [
+        'curso_id',
+        'user_id',
+        'cursos_seccione_id',
+    ];
 }

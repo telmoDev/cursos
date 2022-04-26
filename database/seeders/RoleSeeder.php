@@ -19,6 +19,13 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $user = User::create([
+            'name' => "jmaldonado",
+            'slug' => "jmaldonado",
+            'email' => "jmaldonado@ute.edu.ec",
+            'password' => Hash::make('jmaldonado123'),
+
+        ]);
+        $user = User::create([
             'name' => "ebonifaz",
             'slug' => "ebonifaz",
             'email' => "ebonifaz@111.com.ec",

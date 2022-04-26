@@ -13,7 +13,7 @@ class UserMisCursosContenidoCursoAprobado extends Migration
      */
     public function up()
     {
-        Schema::create('user_mis_cursos_contenido_curso_aprobado', function (Blueprint $table) {
+        Schema::create('curso_aprobado', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('curso_id');

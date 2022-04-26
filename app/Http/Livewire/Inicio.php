@@ -16,10 +16,7 @@ class Inicio extends Component
 
     public function mount()
     {
-        $this->cursos_detacados = Destacados::take(5)->get();
-        $this->categorias = Categoria::take(8)->get();
-        $this->cursos = Curso::take(20)->get();
-        $this->autores = User::take(8)->get();
+        $this->cursos = Curso::take(3)->get();
     }
     public function render()
     {
