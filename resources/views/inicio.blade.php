@@ -7,8 +7,8 @@
 
     <div class="pb-12 font-acephimere">
         <div class="modulo relative w-full">
-            <img src="{{ url('/img/slider-principal-1.jpg') }}" alt="" class="w-full">
-            <img src="{{ url('/img/slider-principal-2.jpg') }}" alt="" class="w-full">
+            <img src="{{ url('/img/slider-principal-1.jpg') }}" alt="" class="w-full p-0 m-0">
+            <img src="{{ url('/img/slider-principal-2.jpg') }}" alt="" class="w-full p-0 m-0">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-1/2 absolute bottom-0 w-full left-1/2 -translate-x-2/4">
                 <div class="absolute w-1/2 h-3/4 bottom-0  ml-4 text-right ">
                     <h1 class="text-white text-7xl font-bold mb-4">#ElPasoXtra</h1>

@@ -1,60 +1,96 @@
-<div class="flex">
-    <main class=" pr-4  w-full ">
-        <div class="w-full">
 
-            <div class="bg-black text-white p-6">
-                <h1 class="title text-2xl font-bold">{{ $curso->nombre}}</h1>
-                <div  class="mt-2 title text-lg ">{{ $curso->descripcion_corta}}</div>
-            </div>
-
-            <div class="shadow-xl mt-5 p-4">
-                <h3 class="title text-2xl font-bold mb-1">Detalle del curso</h3>
-
-                <div class="grid grid-cols-4 gap-4" >
-                    @foreach($curso->secciones as $key => $seccion)
-                        @if( $this->Aprobado($seccion) )
-                            {{-- Auth   --}}
-                            <div class="relative">
-                                <a href="{{ route('curso.seccion' , [$curso->slug, $seccion->contenido->first()->slug ])}}" class="block w-full h-64 bg-center bg-cover" style="background-image: url(https://picsum.photos/id/{{ ( $curso->id + 30) + ( $key * 2 ) }}/200/300)"></a>
-                                <a href="{{ route('curso.seccion' , [$curso->slug, $seccion->contenido->first()->slug ])}}">{{ $seccion->titulo }}</a>
-                                <div class=""><span class="text-xs">Número de contenido: {{ $seccion->contenido->count() }}</span></div>
-                            </div>
-                        @else
-                            {{-- Guest --}}
-                            <div class="relative flex flex-col">
-                                <div class="relative">
-                                    <div class="absolute w-full h-full bg-white opacity-25 flex justify-center items-center">
-                                        <svg class="w-1/3" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 430 322.8" style="enable-background:new 0 0 430 322.8;" xml:space="preserve"><g><path d="M187.6,107.7l13.7,40l-40-13.7c-8.4,16.3-8.4,35.3-1.6,51.6l94.2-69.5C235.5,99.8,209.2,97.2,187.6,107.7L187.6,107.7z"/><path d="M410.2,147.7c-2.1-2.6-21-25.8-53.7-50c-5.8-4.2-11.6-7.9-17.4-11.6l-38.9,28.9c11.1,5.8,21,12.1,29.5,18.4 c13.7,10,25.3,20.5,33.2,28.4c-7.9,7.9-19.5,18.4-33.2,28.4c-26.3,18.4-66.8,41-114.7,41c-21,0-40-4.2-57.9-10.5l-41,30.5 c32.1,15.8,65.8,24.2,98.9,24.2c47.9,0,96.3-17.4,141.5-50.5c32.6-24.2,51.6-47.4,53.7-50l0.5-0.5 C416.5,166.6,416.5,156.1,410.2,147.7L410.2,147.7z"/><path d="M257.6,204c17.9-17.9,22.1-44.7,12.1-66.8l-93.7,69.5C199.7,227.2,235,226.1,257.6,204L257.6,204z"/><path d="M19.8,175.1c2.1,2.6,21,25.8,53.7,50c5.8,4.2,11.6,7.9,17.4,11.6l38.9-28.9c-11.1-5.8-21-12.1-29.5-18.4 c-13.7-10-25.3-20.5-33.2-28.4c7.9-7.9,19.5-18.4,33.2-28.4c25.8-18.9,66.3-41,114.2-41c21,0,40,4.2,57.9,10.5l41-30.5 c-32.1-15.8-65.8-24.2-98.9-24.2c-47.9,0-96.3,17.4-141.6,50.5c-32.6,24.2-51.6,47.4-53.7,50l-0.5,0.5 C13.5,156.1,13.5,166.6,19.8,175.1L19.8,175.1z"/><path d="M421.1,2l6.3,8.5L8.9,320.8l-6.3-8.5L421.1,2z"/></g></svg>
-                                    </div>
-                                    <div class="block w-full h-64 bg-center bg-cover" style="background-image: url(https://picsum.photos/id/{{ ( $curso->id + 30) + ( $key * 2 ) }}/200/300);"></div>
+<div class="">
+    <div class="bg-white  ">
+        <div class="flex">
+            <main class="  w-full ">
+                <div class="w-full">
+                    <div class="flex mb-4 sm:rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="titulo w-8/12 pr-28">
+                            <h1 class="color-[#3f3f3f] title text-2xl  font-bold">{{ $curso->nombre}}</h1>
+                            <div  class="color-[#3f3f3f] mt-6 title text-4xl font-bold">{{ $curso->descripcion_corta}}</div>
+                            <div class="color-[#3f3f3f] text-lg mt-6">{{ $curso->descripcion_larga}}</div>
+                        </div>
+                        <div class="w-4/12 shadow-xl">
+                            <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="400" height="250" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                            <div class="p-6">
+                                <div class="color-[#3f3f3f] font-bold">{{ $curso->nombre}}</div>
+                                <div class="color-[#3f3f3f] font-bold">$. {{ $curso->precio }}</div>
+                                <div class="color-[#3f3f3f] ">
+                                    <a class="block items-center px-1 py-4 mt-16 text-lg text-center font-medium leading-5 text-white uppercase  bg-[#6b2b83]" href="{{ route('login') }}">
+                                        <span class="px-2">Registrate</span>
+                                    </a>
                                 </div>
-                                <div>{{ $seccion->titulo }}</div>
-                                <div class=""><span class="text-xs">Número de contenido: {{ $seccion->contenido->count() }}</span></div>
                             </div>
-                        @endif
-                    @endforeach
+                        </div>
+                    </div>
+
+                    <div class="testimonio color-[#3f3f3f] mt-4 sm:rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="text-4xl font-bold">Que este máster ha cambiado la visión de miles de profesionales no lo decimos nosotros, lo dicen ellos…</div>
+                        <div class="mt-4 ml-10 border-l-4 pr-8 pl-4 text-xl border-[#3f3f3f]">“Llevo toda la vida dirigiendo equipos de marketing y puedo asegurar que <strong>este máster me está aportando cosas nuevas desde la primera clase.”</strong></div>
+                        <div class=" mt-4">
+                            <div class="flex justify-end pr-40">
+                                <div class="text-right">
+                                    <div class="">Ana Martín</div>
+                                    <div class="font-bold">DIGITAL MARKETING <br>MANAGER EN PHILIPS</div>
+                                </div>
+                                <div class="w-20"><img src="/img/foto-quote-dm.png" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-200 w-full py-32 mt-4">
+                        <div class="flex sm:rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div class="mr-40">
+                                <div class="text-4xl">Aprende con los mayores referentes en marketing digital: fundadores y directivos de empresas como <strong>LinkedIn, Facebook, Amazon…</strong></div>
+                                <div class="text-xl mt-4"><strong>Prueba estas clases gratis.</strong> Y, además, descubre cómo funciona nuestro sistema de aprendizaje.</div>
+                            </div>
+                            <div class="">
+                                <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="400" height="250" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div>
+                        <img src="{{ url('/img/el_paso.jpg') }}" alt="" class="w-full m-0 p-0">
+                    </div>
+                    <div class="bg-[#eee8f3] py-32">
+                        <div class="  p-4 sm:rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h3 class="text-2xl font-bold mb-5 color-[#4f2a61]">Conoce todos los contenidos de este programa:</h3>
+
+                            <div class="flex flex-col" >
+                                @foreach($curso->secciones as $key => $seccion)
+                                    <div class="relative flex flex-col bg-white mt-5 p-4">
+                                        <div>{{ $seccion->titulo }}</div>
+                                        <div class=""><span class="text-xs">Número de contenido: {{ $seccion->contenido->count() }}</span></div>
+
+                                    @if( $this->Aprobado($seccion) )
+                                        {{-- Auth   --}}
+                                        <div class="relative flex justify-end">
+                                            <a href="{{ route('curso.seccion' , [$curso->slug, $seccion->contenido->first()->slug ])}}" class=" text-lg bg-[#6b2b83] text-white px-3">Tomarlo</a>
+                                        </div>
+                                    @endif
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="shadow-xl mt-5 p-4">
-                <h3 class="title text-2xl font-bold mb-1">Descripción</h3>
-                <div  class="mt-2 title text-lg ">{{ $curso->descripcion_larga}} {{ $curso->descripcion_larga}} {{ $curso->descripcion_larga}} {{ $curso->descripcion_larga}}</div>
-                <div  class="mt-2 title text-lg ">{{ $curso->descripcion_larga}} {{ $curso->descripcion_larga}} {{ $curso->descripcion_larga}} {{ $curso->descripcion_larga}}</div>
-                <div  class="mt-2 title text-lg ">{{ $curso->descripcion_larga}} {{ $curso->descripcion_larga}} {{ $curso->descripcion_larga}} {{ $curso->descripcion_larga}}</div>
-            </div>
+            </main>
+            @if( false )
+            <aside class="h-4 sticky top-0 w-1/5">
+                <a href="{{ $curso->url() }}" class="block w-full h-32 bg-center" style="background-image: url({{ $curso->imagen() }})"></a>
+                <div class="price text-2xl font-bold">$. {{ $curso->precio }}</div>
+                <div class="btn text-lg mt-2 flex justify-between">
+                    <x-jet-button class="">
+                        {{ __('Comprar') }}
+                    </x-jet-button>
+                    <x-jet-button class="">
+                        {{ __('Fav') }}
+                    </x-jet-button>
+                </div>
+            </aside>
+            @endif
         </div>
-    </main>
-    @if( ! $inscrito )
-    <aside class="h-4 sticky top-0 w-1/5">
-        <a href="{{ $curso->url() }}" class="block w-full h-32 bg-center" style="background-image: url({{ $curso->imagen() }})"></a>
-        <div class="price text-2xl font-bold">$. {{ $curso->precio }}</div>
-        <div class="btn text-lg mt-2 flex justify-between">
-            <x-jet-button class="">
-                {{ __('Comprar') }}
-            </x-jet-button>
-            <x-jet-button class="">
-                {{ __('Fav') }}
-            </x-jet-button>
-        </div>
-    </aside>
-    @endif
+    </div>
 </div>
