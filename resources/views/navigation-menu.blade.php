@@ -33,6 +33,7 @@
                                 {{ __('Mis Cursos ') }}
                             </x-jet-nav-link>
                         @endauth
+
                         <x-jet-nav-link href="{{ route('login') }}" class=" text-white uppercase text-lg bg-[#6b2b83] " :active="request()->routeIs('login')">
                             <span class="px-2">{{ __('Registrate') }}</span>
                         </x-jet-nav-link>
@@ -70,6 +71,12 @@
                                 <div class="block px-4 py-2 text-xs text-gray-400">
                                     {{ __('Manage Account') }}
                                 </div>
+
+                                @auth
+                                    <x-jet-dropdown-link href="{{ route('curso.administrador') }}" :active="request()->routeIs('curso.administrador')">
+                                        {{ __('Administrador') }}
+                                    </x-jet-dropdown-link>
+                                @endauth
 
                                 <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                     {{ __('Profile') }}

@@ -13,7 +13,10 @@ class Secciones extends Model
 
     protected $table = "cursos_seccione";
 
-    protected $fillable = ["titulo"];
+    protected $fillable = [
+        "titulo",
+        "tipo_id"
+    ];
 
     public function contenido()
     {

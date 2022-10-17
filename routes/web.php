@@ -35,9 +35,11 @@ Route::get('carrito', [CarritoController::class, 'carrito'] )->name('carrito');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+    Route::get('/administrador', [CursoController::class, 'administrador'])->name('curso.administrador');
     Route::get('/usuarios/permisos', [PermissionController::class, 'index'])->name('usuarios.permisos');
     Route::get('/usuarios/roles', [RoleController::class, 'index'])->name('usuarios.roles');
     // Route::get('/curso/{slug}', [RoleController::class, 'index'])->name('curso');
     Route::get("/eventos/administrar",[EventoController::class, "administrar"] )->name("eventos.administrar");
     Route::get('/cursos/crear', [CursoController::class, 'crear'])->name('curso.crear');
+    Route::get('/cursos/editar/{id}', [CursoController::class, 'editar'])->name('curso.editar');
 });
