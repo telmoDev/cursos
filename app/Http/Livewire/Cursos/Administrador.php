@@ -10,6 +10,12 @@ class Administrador extends Component
 {
     use WithPagination;
 
+    public function borrar($id)
+    {
+        $curso = Curso::find($id);
+        $curso->delete();
+    }
+
     public function render()
     {
         return view('livewire.cursos.administrador', [

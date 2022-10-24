@@ -3,10 +3,11 @@
 namespace App\Http\Livewire\Cursos;
 
 use App\Models\Curso;
+use App\Models\Cursos\Cita;
 use App\Models\Cursos\Contenido;
+use App\Models\Cursos\ContenidoTipo;
+use App\Models\Cursos\PaginaBloqueCursoModel;
 use App\Models\Cursos\Secciones;
-use App\Models\CursosSeccionesTipo;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
@@ -15,26 +16,43 @@ class Crear extends Component
 {
     public $curso;
     public $secciones;
-    public $seccionesTipos;
+    public $contenidoTipos;
+    public $citas;
+    public $bloques;
 
     protected $rules = [
         'curso.nombre' => 'required',
         'curso.slug' => 'required',
         'curso.descripcion_larga' => 'required',
         'curso.descripcion_corta' => 'required',
+        'curso.descripcion_referencia' => '',
         'curso.precio' => 'required',
 
         'secciones.*.titulo' => 'required',
-        'secciones.*.tipo_id' => 'required',
         'secciones.*.contenido.*.titulo' => 'required',
+        'secciones.*.contenido.*.subtitulo' => 'required',
         'secciones.*.contenido.*.detalle' => 'required',
+        'secciones.*.contenido.*.cursos_contenido_tipo_id' => 'required',
     ];
 
     public function mount()
     {
         $this->curso = new Curso;
+        $this->contenidoTipos = ContenidoTipo::all(['id', 'titulo']);
         $this->secciones = [];
-        $this->seccionesTipos = CursosSeccionesTipo::all(['id', 'nombre']);
+        $this->citas = [];
+        $this->bloques = [
+            [
+                'titulo' => '',
+                'subtitulo' => '',
+                'detalle' => ''
+            ],
+            [
+                'titulo' => '',
+                'subtitulo' => '',
+                'detalle' => ''
+            ]
+        ];
     }
     public function render()
     {
@@ -51,7 +69,6 @@ class Crear extends Component
     {
         $this->secciones[] = [
             'titulo' => '',
-            'tipo_id' => '',
             'contenido' => [],
         ];
     }
@@ -59,8 +76,26 @@ class Crear extends Component
     {
         $this->secciones["{$key}"]['contenido'][] = [
             'titulo' => '',
+            'subtitulo' => '',
             'detalle' => '',
+            'cursos_contenido_tipo_id' => '',
         ];
+    }
+
+    public function agregar_cita()
+    {
+        $this->citas[] = [
+            'autor' => '',
+            'profesion' => '',
+            'imagen' => '',
+            'detalle' => ''
+        ];
+    }
+
+    public function borrarCita($key)
+    {
+       unset($this->citas[$key]);
+       $this->citas = array_values($this->citas);
     }
 
     public function borrarSeccion($seccionKey)
@@ -87,18 +122,33 @@ class Crear extends Component
 
         $this->curso->save();
 
+        foreach ($this->citas as $key => $value) {
+            $this->citas[$key]['profesion'] = strtoupper($this->citas[$key]['profesion']);
+            $this->citas[$key]['cursos_id'] = $this->curso->id;
+        }
+        if (count($this->citas)) {
+            Cita::insert(...$this->citas);
+        }
+
+        foreach ($this->bloques as $key => $value) {
+            $this->bloques[$key]['cursos_id'] = $this->curso->id;
+        }
+        if (count($this->bloques)) {
+            PaginaBloqueCursoModel::insert($this->bloques);
+        }
+
         foreach ($this->secciones as $key => $seccione) {
             $seccion = new Secciones;
             $seccion->titulo = $seccione['titulo'];
-            $seccion->tipo_id = $seccione['tipo_id'];
             $seccion->cursos_id = $this->curso->id;
             $seccion->save();
 
             foreach ($seccione['contenido'] as $key => $contenido) {
                 $contenido_obj = new Contenido;
                 $contenido_obj->titulo = $contenido['titulo'];
+                $contenido_obj->subtitulo = $contenido['subtitulo'];
                 $contenido_obj->detalle = $contenido['detalle'];
-                $contenido_obj->cursos_contenido_tipo_id = 1;
+                $contenido_obj->cursos_contenido_tipo_id = $contenido['cursos_contenido_tipo_id'];
                 $contenido_obj->cursos_seccione_id = $seccion->id;
 
                 $contenido_obj->slug = Str::slug($contenido['titulo'], '-');
@@ -110,7 +160,8 @@ class Crear extends Component
         $this->reset([
             'curso',
             'secciones',
-            'seccionesTipos',
         ]);
+
+        redirect()->route('curso.administrador');
     }
 }

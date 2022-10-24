@@ -15,7 +15,7 @@ class Secciones extends Model
 
     protected $fillable = [
         "titulo",
-        "tipo_id"
+        'cursos_id'
     ];
 
     public function contenido()

@@ -24,6 +24,7 @@ class CreateCursosTable extends Migration
             $table->string("descripcion_corta");
             $table->double("precio");
             $table->integer("num_inscritos")->default(0);
+            $table->text("descripcion_referencia")->nullable();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

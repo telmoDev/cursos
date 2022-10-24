@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Cursos\Cita;
 use App\Models\Cursos\Contenido;
 use App\Models\Cursos\Evaluacion;
+use App\Models\Cursos\PaginaBloqueCursoModel;
 use App\Models\Cursos\Secciones;
 use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -20,6 +22,7 @@ class Curso extends Model
         'nombre',
         'descripcion_larga',
         'descripcion_corta',
+        'descripcion_referencia',
         'precio',
         'user_id',
         'cursos_categoria_id',
@@ -54,5 +57,15 @@ class Curso extends Model
     public function evaluacion()
     {
         return $this->hasOne(Evaluacion::class,"cursos_id","id");
+    }
+
+    public function citas()
+    {
+        return $this->hasMany(Cita::class,"cursos_id","id");
+    }
+
+    public function BloquesPagina()
+    {
+        return $this->hasMany(PaginaBloqueCursoModel::class,"cursos_id","id");
     }
 }

@@ -17,9 +17,6 @@ class CursosSeccione extends Migration
             $table->id();
             $table->string("titulo");
 
-            $table->unsignedBigInteger('tipo_id')->nullable();
-            $table->foreign('tipo_id')->references('id')->on('cursos_secciones_tipos')->onDelete('cascade');
-
             $table->unsignedBigInteger('cursos_id');
             $table->foreign('cursos_id')->references('id')->on('cursos')->onDelete('cascade');
 

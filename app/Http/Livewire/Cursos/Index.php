@@ -2,6 +2,8 @@
 
 namespace App\Http\Livewire\Cursos;
 
+use App\Models\Cursos\Cita;
+use App\Models\Cursos\PaginaBloqueCursoModel;
 use App\Models\Users\Aprobados;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -12,6 +14,8 @@ class Index extends Component
     public $curso;
     public $inscrito = false;
     public $secciones_inscrito = [];
+    public $citas;
+    public $bloques;
 
     public function mount()
     {
@@ -24,6 +28,8 @@ class Index extends Component
                 // $this->secciones_inscrito = ;
             }
         }
+        $this->citas = Cita::where('cursos_id', $this->curso->id)->get();
+        $this->bloques = PaginaBloqueCursoModel::where('cursos_id', $this->curso->id)->get();
     }
 
     public function render()
