@@ -5,6 +5,7 @@
     <h4>Secciones ({{ count( $secciones ) }})</h4>
     @forelse( $secciones as $key => $seccion )
         <div class="shadow p-2 mt-3 mb-3 hover:border-2 hover:border-[#6b2b83]">
+          <label class="block text-gray-700 text-sm font-bold mt-2 text-center">Sección #{{ $loop->index + 1 }}</label>
             <div class="seccion">
                 <div class="box-entrada px-2 w-full mt-2">
                     <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
@@ -24,7 +25,7 @@
 
             <div class="shadow p-2 mt-3 mb-3">
                 @forelse( $seccion['contenido'] as $keyc => $contenido )
-
+                <label class="block text-gray-700 text-sm font-bold mt-2 text-center">Contenido #{{ $loop->index + 1 }}</label>
                 <div class="shadow p-2 mt-3 mb-3 hover:border-2 hover:border-[#6b2b83]">
                     <div class="box-entrada px-2 w-full mt-2">
                         <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
@@ -77,6 +78,25 @@
                         @error("secciones.{$key}.contenido.{$key}.detalle")
                             <div class="text-red-600 text-sm">{{ $message }}</div>
                         @enderror
+                    </div>
+                    <div class="box-entrada  px-2 w-full mt-2" >
+                      <div >
+                        <label class=" text-gray-700 text-sm font-bold mr-2" >
+                        Contenido para descargar
+                        </label>
+                      </div>
+                      <div class="box-entrada px-2 w-full mt-2" >
+                        <div class="" style="width: fit-content">
+                          @if ($secciones[$key]['contenido'][$keyc]['contenido_download'])
+                          <div class="my-2 mx-auto relative" style="width: 75px">
+                            <span class="absolute cursor-pointer" style="top: -3px; right: -3px;" wire:click="borrarContenidoDownload({{$key}}, {{$keyc}})">
+                              @include('livewire.cursos._icons.cancel')
+                          </span>
+                            @include('livewire.cursos._icons.file_download')
+                          </div>
+                          @endif
+                          <input class="btn-contenido rounded-lg bg-indigo-500 " type="file" wire:model.lazy="secciones.{{$key}}.contenido.{{$keyc}}.contenido_download">
+                        </div>
                     </div>
                     <div class="flex mt-2">
                         <div class="rounded-lg bg-red-600 p-2" title="Eliminar Contenido" wire:click="borrarContenido({{ $keyc }}, {{ $keyc }})">

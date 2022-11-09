@@ -13,7 +13,7 @@ class Listas extends Component
     public function render()
     {
         return view('livewire.cursos.listas', [
-            'cursos' => Curso::paginate(3),
+            'cursos' => Curso::paginate(15),
         ]);
     }
 }

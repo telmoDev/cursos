@@ -13,7 +13,7 @@ class Contenido extends Model
 
     protected $table = "cursos_contenido";
 
-    protected $fillable = ["titulo", "subtitulo","detalle", "recurso", 'slug', 'cursos_seccione_id', 'cursos_contenido_tipo_id'];
+    protected $fillable = ["titulo", "subtitulo","detalle", "recurso", 'slug', 'cursos_seccione_id', 'cursos_contenido_tipo_id', 'contenido_download'];
 
     public function seccion()
     {

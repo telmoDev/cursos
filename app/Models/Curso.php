@@ -11,6 +11,7 @@ use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Curso extends Model
 {
@@ -31,7 +32,10 @@ class Curso extends Model
 
     public function imagen()
     {
-        return "/img/cursos/" . $this->imagen;
+      if ($this->imagen) {
+        return route('img.bg.curso', ['folder' => $this->id, 'filename' => $this->imagen]);
+      }
+      return '';
     }
 
     public function autor()

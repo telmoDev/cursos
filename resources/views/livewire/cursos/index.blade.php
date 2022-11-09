@@ -72,17 +72,19 @@
                         @else
                             <div class="bg-gray-200 w-full py-32 mt-4">
                                 <div class="flex sm:rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                                    <div class="mr-40">
+                                    <div class="flex w-full">
+                                      <div class="mr-40 w-full">
                                         <div class="text-4xl">{{ $item->titulo }}</div>
                                         <div class="text-xl mt-4">
                                             {{ $item->detalle }}
                                         </div>
-                                        <div class="">
-                                            <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7"
-                                                width="400" height="250" frameborder="0"
-                                                allow="autoplay; fullscreen; picture-in-picture"
-                                                allowfullscreen></iframe>
-                                        </div>
+                                      </div>
+                                      <div class="">
+                                          <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7"
+                                              width="400" height="250" frameborder="0"
+                                              allow="autoplay; fullscreen; picture-in-picture"
+                                              allowfullscreen></iframe>
+                                      </div>
                                     </div>
                                 </div>
                             </div>

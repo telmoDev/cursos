@@ -8,7 +8,7 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TemaController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Storage;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,6 +33,21 @@ Route::get('/autor/{slug}', [AutorController::class, 'list'])->name('autor.list'
 
 Route::get('carrito', [CarritoController::class, 'carrito'] )->name('carrito');
 
+// http://127.0.0.1:8000/img-bg/cursos/prueba-4/prueba-4.jpg
+Route::get('img-bg/cursos/{folder}/{filename}', function($folder,$filename) {
+// Route::get('img-bg/{slug}', function($slug) {
+    $path = storage_path()."/app/cursos/{$folder}/{$filename}";
+    if(! \File::exists($path)) {
+        return response()->json(['message' => 'Image not found.'], 404);
+    }
+    $file = \File::get($path);
+    $type = \File::mimeType($path);
+
+    $response = response()->make($file, 200);
+    $response->header("Content-Type", $type);
+    return $response;
+})->name('img.bg.curso');
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
     Route::get('/administrador', [CursoController::class, 'administrador'])->name('curso.administrador');
@@ -42,4 +57,16 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get("/eventos/administrar",[EventoController::class, "administrar"] )->name("eventos.administrar");
     Route::get('/cursos/crear', [CursoController::class, 'crear'])->name('curso.crear');
     Route::get('/cursos/editar/{id}', [CursoController::class, 'editar'])->name('curso.editar');
+    Route::get('contenido/curso/{folder}/download/{folder2}/{filename}', function($folder, $folder2, $filename) {
+      // Route::get('img-bg/{slug}', function($slug) {
+          $path = storage_path()."/app/cursos/{$folder}/download/{$folder2}/{$filename}";
+          // if(! Storage::exists($path)) {
+          //     return response()->json(['message' => 'Image not found.'], 404);
+          // }
+          // $file = Storage::get($path);
+          // $type = Storage::mimeType($path);
+
+          $response = response()->download($path);
+          return $response;
+      })->name('contenido.download.file');
 });
