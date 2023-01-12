@@ -2,7 +2,7 @@
     <div class="mb-4">
         <a href="{{ route('curso.administrador') }}" class="flex items-center font-bold">
             <div class="mr-2">
-                @include('livewire.cursos._icons.arrow_left')
+              <i class="fa-solid fa-chevron-left"></i>
             </div>
             Regresar
         </a>
@@ -18,9 +18,7 @@
             {{-- end Reseña --}}
 
 
-            {{-- Bloques --}}
-            @include('livewire.cursos._partes._form._crear.form_bloque_pagina')
-            {{-- end Bloques --}}
+
         </div>
         {{-- Syllabus --}}
         @include('livewire.cursos._partes._form._crear.form_secciones')

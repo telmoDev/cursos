@@ -75,4 +75,94 @@
         @endif
     </div>
     <input class="btn-file rounded-lg bg-indigo-500 " type="file" accept="image/*" wire:model.lazy="imgCurso">
+    @error('imgCurso')
+        <div class="text-red-600 text-sm">{{ $message }}</div>
+    @enderror
+</div>
+{{-- Bloque 1 --}}
+<hr class="my-5">
+<div class="hover:border-2 hover:border-[#6b2b83] p-2 border">
+    <h3 class="text-lg">Información - Sección con video</h3>
+    <div class="box-entrada px-2 w-full mt-2 hover:order-1 hover:">
+        <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
+            Titulo
+        </label>
+        <input type="text"
+            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
+            placeholder="Titulo..." wire:model.lazy="curso.bloque1_titulo">
+        {{-- @error("secciones.{$key}.contenido.{$keyc}.subtitulo")
+                    <div class="text-red-600 text-sm">{{ $message }}</div>
+                @enderror --}}
+    </div>
+    <div class="box-entrada px-2 w-full mt-2 hover:order-1 hover:">
+        <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
+            Subtitulo
+        </label>
+        <input type="text"
+            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
+            placeholder="Subtitulo..." wire:model.lazy="curso.bloque1_subtitulo">
+        {{-- @error("secciones.{$key}.contenido.{$keyc}.subtitulo")
+                    <div class="text-red-600 text-sm">{{ $message }}</div>
+                @enderror --}}
+    </div>
+    <div class="box-entrada px-2 w-full mt-2 hover:order-1 hover:">
+      <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
+          Video(url)
+      </label>
+      <input type="text"
+          class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
+          placeholder="url..." wire:model.lazy="curso.bloque1_recurso">
+      {{-- @error("secciones.{$key}.contenido.{$keyc}.subtitulo")
+                  <div class="text-red-600 text-sm">{{ $message }}</div>
+              @enderror --}}
+  </div>
+    <div class="box-entrada px-2 w-full mt-2">
+        <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
+            Detalle
+        </label>
+        <textarea
+            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
+            wire:model.lazy="curso.bloque1_detalle"></textarea>
+        {{-- @error("secciones.{$key}.contenido.{$key}.detalle")
+                    <div class="text-red-600 text-sm">{{ $message }}</div>
+                @enderror --}}
+    </div>
+</div>
+{{-- Bloque 2 --}}
+<hr class="my-5">
+<div class="hover:border-2 hover:border-[#6b2b83] p-2 border">
+    <h3 class="text-lg">Información - Sección roja</h3>
+    <div class="box-entrada px-2 w-full mt-2 hover:order-1 hover:">
+        <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
+            Titulo
+        </label>
+        <input type="text"
+            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
+            placeholder="Titulo..." wire:model.lazy="curso.bloque2_titulo">
+        {{-- @error("secciones.{$key}.contenido.{$keyc}.subtitulo")
+                    <div class="text-red-600 text-sm">{{ $message }}</div>
+                @enderror --}}
+    </div>
+    <div class="box-entrada px-2 w-full mt-2 hover:order-1 hover:">
+        <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
+            Subtitulo
+        </label>
+        <input type="text"
+            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
+            placeholder="Subtitulo..." wire:model.lazy="curso.bloque2_subtitulo">
+        {{-- @error("secciones.{$key}.contenido.{$keyc}.subtitulo")
+                    <div class="text-red-600 text-sm">{{ $message }}</div>
+                @enderror --}}
+    </div>
+    <div class="box-entrada px-2 w-full mt-2">
+        <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
+            Detalle
+        </label>
+        <textarea
+            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
+            wire:model.lazy="curso.bloque2_detalle"></textarea>
+        @error("secciones.{$key}.contenido.{$key}.detalle")
+                    <div class="text-red-600 text-sm">{{ $message }}</div>
+                @enderror
+    </div>
 </div>

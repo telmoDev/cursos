@@ -30,6 +30,16 @@ class CursoController extends Controller
         return view("cursos.evaluacion", compact('curso'));
     }
 
+    public function evaluacionAdmin(Request $request)
+    {
+        return view("cursos.evaluacion-admin");
+    }
+
+    public function evaluacionCrearEditar(Request $request, $id = null)
+    {
+        return view("cursos.evaluacion-crear-editar", compact('id'));
+    }
+
     public function list()
     {
         return view("cursos.list");

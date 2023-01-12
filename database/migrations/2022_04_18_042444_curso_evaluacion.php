@@ -17,7 +17,7 @@ class CursoEvaluacion extends Migration
             $table->id();
 
             $table->string("titulo")->nullable();
-            $table->integer("cantidad_preguntas");
+            $table->integer("cantidad_preguntas")->nullable();
             $table->boolean("estado")->default(true);
 
             $table->unsignedBigInteger('cursos_id');

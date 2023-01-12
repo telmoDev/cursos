@@ -21,7 +21,6 @@ class Crear extends Component
   public $secciones;
   public $contenidoTipos;
   public $citas;
-  public $bloques;
 
   public $imgCurso;
 
@@ -32,11 +31,22 @@ class Crear extends Component
     'curso.descripcion_corta' => 'required',
     'curso.descripcion_referencia' => '',
     'curso.precio' => 'required',
+    'imgCurso' => 'required',
+
+    'curso.bloque1_titulo' => '',
+    'curso.bloque1_subtitulo' => '',
+    'curso.bloque1_detalle' => '',
+    'curso.bloque1_recurso' => '',
+
+    'curso.bloque2_titulo' => '',
+    'curso.bloque2_subtitulo' => '',
+    'curso.bloque2_detalle' => '',
 
     'secciones.*.titulo' => 'required',
     'secciones.*.contenido.*.titulo' => 'required',
     'secciones.*.contenido.*.subtitulo' => 'required',
     'secciones.*.contenido.*.detalle' => 'required',
+    'secciones.*.contenido.*.recurso' => 'required',
     'secciones.*.contenido.*.cursos_contenido_tipo_id' => 'required',
   ];
 
@@ -46,18 +56,6 @@ class Crear extends Component
     $this->contenidoTipos = ContenidoTipo::all(['id', 'titulo']);
     $this->secciones = [];
     $this->citas = [];
-    $this->bloques = [
-      [
-        'titulo' => '',
-        'subtitulo' => '',
-        'detalle' => ''
-      ],
-      [
-        'titulo' => '',
-        'subtitulo' => '',
-        'detalle' => ''
-      ]
-    ];
   }
   public function render()
   {
@@ -89,6 +87,8 @@ class Crear extends Component
       'detalle' => '',
       'cursos_contenido_tipo_id' => '',
       'contenido_download' => '',
+      'img_fondo' => '',
+      'recurso' => ''
     ];
   }
 
@@ -125,6 +125,16 @@ class Crear extends Component
     $this->secciones[$seccionKey]['contenido'][$contenidoKey]['contenido_download'] = null;
   }
 
+  public function borrarImgFondo($seccionKey, $contenidoKey)
+  {
+    $this->secciones[$seccionKey]['contenido'][$contenidoKey]['img_fondo'] = null;
+  }
+
+  public function borrarImgCita($key)
+  {
+    $this->citas[$key]['imagen'] = null;
+  }
+
   public function guardar()
   {
     $this->validate($this->rules, [
@@ -147,13 +157,6 @@ class Crear extends Component
     }
     if (count($this->citas)) {
       Cita::insert(...$this->citas);
-    }
-
-    foreach ($this->bloques as $key => $value) {
-      $this->bloques[$key]['cursos_id'] = $this->curso->id;
-    }
-    if (count($this->bloques)) {
-      PaginaBloqueCursoModel::insert($this->bloques);
     }
 
     foreach ($this->secciones as $key => $seccione) {

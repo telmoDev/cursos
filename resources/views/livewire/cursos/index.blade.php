@@ -51,45 +51,52 @@
                             </div>
                         @endforeach
                     </div>
-                    @foreach ($bloques as $item)
-                        @if ($loop->even)
-                            <div>
-                                {{-- <img src="{{ url('/img/el_paso.jpg') }}" alt="" class="w-full m-0 p-0"> --}}
-                                <div class="py-10 bg-[#F13939]">
-                                    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-right">
-                                        <div class="text-white text-9xl font-bold">
-                                            {{ $item->titulo }}
-                                        </div>
-                                        <div class="text-white text-7xl leading-none">
-                                            {{ $item->subtitulo }}
-                                        </div>
-                                        <div class="text-[#6b2b83] text-4xl leading-snug">
-                                            {{ $item->detalle }}
-                                        </div>
-                                    </div>
-                                </div>
+                    {{--
+                      'bloque1_titulo',
+                        'bloque1_subtitulo',
+                        'bloque1_detalle',
+                        'bloque1_activo',
+                        'bloque2_titulo',
+                        'bloque2_subtitulo',
+                        'bloque2_detalle',
+                        'bloque2_activo'
+                      --}}
+                    {{-- bloque con video --}}
+                    <div class="bg-gray-200 w-full py-32 mt-4">
+                      <div class="flex sm:rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                          <div class="flex w-full">
+                            <div class="mr-40 w-full">
+                              <div class="text-4xl">{{ $curso->bloque1_titulo }}</div>
+                              <div class="text-xl mt-4">
+                                  {{ $curso->bloque1_detalle }}
+                              </div>
                             </div>
-                        @else
-                            <div class="bg-gray-200 w-full py-32 mt-4">
-                                <div class="flex sm:rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                                    <div class="flex w-full">
-                                      <div class="mr-40 w-full">
-                                        <div class="text-4xl">{{ $item->titulo }}</div>
-                                        <div class="text-xl mt-4">
-                                            {{ $item->detalle }}
-                                        </div>
-                                      </div>
-                                      <div class="">
-                                          <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7"
-                                              width="400" height="250" frameborder="0"
-                                              allow="autoplay; fullscreen; picture-in-picture"
-                                              allowfullscreen></iframe>
-                                      </div>
-                                    </div>
-                                </div>
+                            <div class="">
+                                <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7"
+                                    width="400" height="250" frameborder="0"
+                                    allow="autoplay; fullscreen; picture-in-picture"
+                                    allowfullscreen></iframe>
                             </div>
-                        @endif
-                    @endforeach
+                          </div>
+                      </div>
+                  </div>
+                    {{-- Bloque rojo --}}
+                    <div>
+                      {{-- <img src="{{ url('/img/el_paso.jpg') }}" alt="" class="w-full m-0 p-0"> --}}
+                      <div class="py-10 bg-[#F13939]">
+                          <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-right">
+                              <div class="text-white text-9xl font-bold">
+                                  {{ $curso->bloque2_titulo }}
+                              </div>
+                              <div class="text-white text-7xl leading-none">
+                                  {{ $curso->bloque2_subtitulo }}
+                              </div>
+                              <div class="text-[#6b2b83] text-4xl leading-snug">
+                                  {{ $curso->bloque2_detalle }}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
 
 
                     <div class="bg-[#eee8f3] py-32">

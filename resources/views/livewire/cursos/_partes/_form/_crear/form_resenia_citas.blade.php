@@ -37,17 +37,22 @@
                                 <div class="text-red-600 text-sm">{{ $message }}</div>
                             @enderror --}}
             </div>
-            <div class="box-entrada px-2 w-full mt-2 hover:order-1 hover:">
-                <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
-                    imagen
-                </label>
-                <input type="text"
-                    class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
-                    placeholder="Profesión de autor" {{-- wire:model.lazy="secciones.{{$key}}.contenido.{{$keyc}}.subtitulo" --}}>
-                {{-- @error("secciones.{$key}.contenido.{$keyc}.subtitulo")
-                                <div class="text-red-600 text-sm">{{ $message }}</div>
-                            @enderror --}}
-            </div>
+
+            <div class="box-entrada px-2 w-full mt-2">
+              <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
+                  Foto( 100px x 100px )
+              </label>
+              <div class="relative {{ $citas[$loop->index]['imagen'] ? 'my-2' : '' }}" style="width: fit-content">
+                  @if ($citas[$loop->index]['imagen'])
+                      <span class="absolute right-2 top-2 cursor-pointer" wire:click="borrarImgCita({{ $loop->index }})">
+                          @include('livewire.cursos._icons.cancel')
+                      </span>
+                      <img src="{{ $citas[$loop->index]['imagen']->temporaryUrl() }}" class="p-0" style="width: 250px;max-height: 250px;">
+                  @endif
+              </div>
+              <input class="btn-file rounded-lg bg-indigo-500 " type="file" accept="image/*" wire:model.lazy="citas.{{$loop->index}}.imagen">
+          </div>
+
             <div class="box-entrada px-2 w-full mt-2">
                 <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
                     Detalle

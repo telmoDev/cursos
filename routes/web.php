@@ -7,8 +7,10 @@ use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TemaController;
+use App\Http\Livewire\AdministradorComponent;
+use App\Http\Livewire\Cursos\EvaluacionAdmin;
+use App\Http\Livewire\Cursos\EvaluacionCrearEditar;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,8 +51,13 @@ Route::get('img-bg/cursos/{folder}/{filename}', function($folder,$filename) {
 })->name('img.bg.curso');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
+  Route::get('/administrador', [AdministradorComponent::class, 'render'])->name('administrador');
+  Route::get('/administrador/cursos', [CursoController::class, 'administrador'])->name('curso.administrador');
+  Route::get('/administrador/evaluaciones', [CursoController::class, 'evaluacionAdmin'])->name('evaluacion.admin');
+  Route::get('/administrador/evaluacion/{id?}', [CursoController::class, 'evaluacionCrearEditar'])->name('evaluacion.crear.editar');
+
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
-    Route::get('/administrador', [CursoController::class, 'administrador'])->name('curso.administrador');
     Route::get('/usuarios/permisos', [PermissionController::class, 'index'])->name('usuarios.permisos');
     Route::get('/usuarios/roles', [RoleController::class, 'index'])->name('usuarios.roles');
     // Route::get('/curso/{slug}', [RoleController::class, 'index'])->name('curso');
@@ -58,15 +65,20 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/cursos/crear', [CursoController::class, 'crear'])->name('curso.crear');
     Route::get('/cursos/editar/{id}', [CursoController::class, 'editar'])->name('curso.editar');
     Route::get('contenido/curso/{folder}/download/{folder2}/{filename}', function($folder, $folder2, $filename) {
-      // Route::get('img-bg/{slug}', function($slug) {
-          $path = storage_path()."/app/cursos/{$folder}/download/{$folder2}/{$filename}";
-          // if(! Storage::exists($path)) {
-          //     return response()->json(['message' => 'Image not found.'], 404);
-          // }
-          // $file = Storage::get($path);
-          // $type = Storage::mimeType($path);
+      $path = storage_path()."/app/cursos/{$folder}/download/{$folder2}/{$filename}";
+      $response = response()->download($path);
+      return $response;
+    })->name('contenido.download.file');
+    Route::get('contenido/curso/{folder}/fondo/{folder2}/{filename}', function($folder, $folder2, $filename) {
+      $path = storage_path()."/app/cursos/{$folder}/fondo/{$folder2}/{$filename}";
+      if(! \File::exists($path)) {
+          return response()->json(['message' => 'Image not found.'], 404);
+      }
+      $file = \File::get($path);
+      $type = \File::mimeType($path);
 
-          $response = response()->download($path);
-          return $response;
-      })->name('contenido.download.file');
+      $response = response()->make($file, 200);
+      $response->header("Content-Type", $type);
+      return $response;
+    })->name('contenido.fondo.img');
 });

@@ -27,6 +27,15 @@ class Curso extends Model
         'precio',
         'user_id',
         'cursos_categoria_id',
+        'bloque1_titulo',
+        'bloque1_subtitulo',
+        'bloque1_detalle',
+        'bloque1_recurso',
+        'bloque1_activo',
+        'bloque2_titulo',
+        'bloque2_subtitulo',
+        'bloque2_detalle',
+        'bloque2_activo'
     ];
 
 
@@ -68,8 +77,4 @@ class Curso extends Model
         return $this->hasMany(Cita::class,"cursos_id","id");
     }
 
-    public function BloquesPagina()
-    {
-        return $this->hasMany(PaginaBloqueCursoModel::class,"cursos_id","id");
-    }
 }

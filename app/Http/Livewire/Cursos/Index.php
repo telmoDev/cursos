@@ -29,7 +29,7 @@ class Index extends Component
             }
         }
         $this->citas = Cita::where('cursos_id', $this->curso->id)->get();
-        $this->bloques = PaginaBloqueCursoModel::where('cursos_id', $this->curso->id)->get();
+        // $this->bloques = PaginaBloqueCursoModel::where('cursos_id', $this->curso->id)->get();
     }
 
     public function render()
