@@ -11,7 +11,7 @@
         <x-slot name="content">
             <div class="flex justify-between items-center">
                 <div class="imagen" style="width: 20%;">
-                    <div style="background-image: url({{ $curso->imagen() }})" class="h-32 w-32 bg-center"></div>
+                    <div style="background-image: url({{ $curso->getImagen() }})" class="h-32 w-32 bg-center"></div>
                 </div>
                 <div class="detalle px-5 text-left" style="width: 60%;">
                     <h3 class="font-bold text-lg">{{ $curso->nombre}}</h3>

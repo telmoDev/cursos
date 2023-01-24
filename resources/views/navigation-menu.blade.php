@@ -34,7 +34,7 @@
                             </x-jet-nav-link>
                         @endauth
                         @guest
-                          <x-jet-nav-link href="{{ route('login') }}" class=" text-white uppercase  bg-[#6b2b83] " :active="request()->routeIs('login')">
+                          <x-jet-nav-link href="{{ route('register') }}" class=" text-white uppercase  bg-[#6b2b83] " :active="request()->routeIs('login')">
                               <span class="px-6 py-2 size-18 font-acephimere">{{ __('Registrate') }}</span>
                           </x-jet-nav-link>
                         @endguest

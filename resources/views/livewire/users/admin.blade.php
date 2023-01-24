@@ -4,7 +4,7 @@
     <div>
     <div class="mb-3">
         <a href="#" class="text-md rounded-lg  bg-[#6b2b83] text-white py-2 px-4" >
-            Nueva categoría
+            Nuevo usuario
         </a>
     </div>
     <table class="table table-bordered mt-2 w-full">
@@ -12,14 +12,16 @@
           <tr class="bg-gray-100">
             <th class="text-center" >#</th>
             <th class="text-center" >Nombre</th>
+            <th class="text-center" >Correo</th>
             <th class="text-center" >Acciones</th>
           </tr>
         </thead>
         <tbody>
-            @foreach ($categorias as $item)
+            @foreach ($users as $item)
                 <tr class="odd:bg-white even:bg-gray-100">
                     <td class="text-center">{{ ($loop->index + 1) }}</td>
-                    <td>{{ $item->nombre }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->email }}</td>
                     <td>
                         <div class="flex justify-center items-center">
                             <div class="ml-4">
@@ -36,7 +38,7 @@
             @endforeach
         </tbody>
       </table>
-      {{ $categorias->links() }}
+      {{ $users->links() }}
 
 </div>
 

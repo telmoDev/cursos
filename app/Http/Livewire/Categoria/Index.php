@@ -4,16 +4,20 @@ namespace App\Http\Livewire\Categoria;
 
 use App\Models\Cursos\Categoria;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
-  public $categorias;
-  public function mount()
-  {
-    $this->categorias = Categoria::all();
-  }
+  use WithPagination;
+  public function borrar($id)
+    {
+        $categiria = Categoria::find($id);
+        $categiria->delete();
+    }
     public function render()
     {
-        return view('livewire.categoria.index');
+        return view('livewire.categoria.index',[
+          'categorias' => Categoria::paginate(15)
+        ]);
     }
 }

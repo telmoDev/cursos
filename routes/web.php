@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\AutorController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\CursoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TemaController;
+use App\Http\Controllers\UserGeneralController;
 use App\Http\Livewire\AdministradorComponent;
 use App\Http\Livewire\Cursos\EvaluacionAdmin;
 use App\Http\Livewire\Cursos\EvaluacionCrearEditar;
@@ -50,12 +52,27 @@ Route::get('img-bg/cursos/{folder}/{filename}', function($folder,$filename) {
     return $response;
 })->name('img.bg.curso');
 
+Route::get('img-bg/cursos/bg/', function() {
+      $path = storage_path()."/app/hand.jpg";
+      if(! \File::exists($path)) {
+          return response()->json(['message' => 'Image not found.'], 404);
+      }
+      $file = \File::get($path);
+      $type = \File::mimeType($path);
+
+      $response = response()->make($file, 200);
+      $response->header("Content-Type", $type);
+      return $response;
+  })->name('img.cursos.bg');
+
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
   Route::get('/administrador', [AdministradorComponent::class, 'render'])->name('administrador');
   Route::get('/administrador/cursos', [CursoController::class, 'administrador'])->name('curso.administrador');
   Route::get('/administrador/evaluaciones', [CursoController::class, 'evaluacionAdmin'])->name('evaluacion.admin');
   Route::get('/administrador/evaluacion/{id?}', [CursoController::class, 'evaluacionCrearEditar'])->name('evaluacion.crear.editar');
+  Route::get('/administrador/categorias', [CategoriaController::class, 'index'])->name('evaluacion.categoria.admin');
+  Route::get('/administrador/usuarios', [UserGeneralController::class, 'index'])->name('evaluacion.user.admin');
 
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
     Route::get('/usuarios/permisos', [PermissionController::class, 'index'])->name('usuarios.permisos');

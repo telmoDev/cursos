@@ -2009,6 +2009,10 @@ select {
 	padding-top: 2.5rem;
 	padding-bottom: 2.5rem;
 }
+.py-14 {
+	padding-top: 3.5rem;
+	padding-bottom: 3.5rem;
+}
 .py-32 {
 	padding-top: 8rem;
 	padding-bottom: 8rem;
@@ -2021,13 +2025,13 @@ select {
 	padding-left: 4rem;
 	padding-right: 4rem;
 }
-.px-8 {
-	padding-left: 2rem;
-	padding-right: 2rem;
-}
 .px-5 {
 	padding-left: 1.25rem;
 	padding-right: 1.25rem;
+}
+.px-8 {
+	padding-left: 2rem;
+	padding-right: 2rem;
 }
 .pt-6 {
 	padding-top: 1.5rem;
@@ -2083,9 +2087,6 @@ select {
 .pl-12 {
 	padding-left: 3rem;
 }
-.pt-12 {
-	padding-top: 3rem;
-}
 .pb-12 {
 	padding-bottom: 3rem;
 }
@@ -2100,6 +2101,9 @@ select {
 }
 .pt-8 {
 	padding-top: 2rem;
+}
+.pt-12 {
+	padding-top: 3rem;
 }
 .pl-7 {
 	padding-left: 1.75rem;
@@ -2589,12 +2593,24 @@ button.swiper-pagination-bullet{border:none;margin:0;padding:0;box-shadow:none;-
         url(../fonts/Acephimere.ttf?3edb2263522e735fac6a190202b24cfc) format("truetype"),
         url(../fonts/Acephimere.svg?65baa4ae01fdf8adbfbb507b5a7e09f2#Acephimere) format("svg");
 }
+@font-face {
+  font-family: 'AcephimereBold';
+  src: url(../fonts/Acephimere_Bold_1.eot?3fba3ef2d9692f41825ff83137e94ccb);
+  src: url(../fonts/Acephimere_Bold_1.eot?3fba3ef2d9692f41825ff83137e94ccb) format('embedded-opentype'),
+        url(../fonts/Acephimere_Bold_1.woff2?98713a66992f97f86e8de2727e04ffde) format('woff2'),
+        url(../fonts/Acephimere_Bold_1.woff?b457b1ac87bc685941aaef56bb8f85c4) format('woff'),
+        url(../fonts/Acephimere_Bold_1.ttf?1c21dcc963d4bf4d59d59da66a66693a) format('truetype'),
+        url(../fonts/Acephimere_Bold_1.svg?ae7934a96b107510db14d81ff4f2a5ce#Acephimere_Bold_1) format('svg');
+}
 .slider-principal {
     width: 1100px;
     height: 300px;
 }
 .font-acephimere {
     font-family: "Acephimere";
+}
+.font-acephimere-bold {
+  font-family: 'AcephimereBold';
 }
 .slider-principal .swiper-slide {
     width: 100%;

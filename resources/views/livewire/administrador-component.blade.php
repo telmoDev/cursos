@@ -21,16 +21,16 @@
         <div class="p-2 flex" @click="open = !open">
           <i class="fa-solid fa-user"></i>
         </div>
-        <a x-show="open" x-transition class="pr-2 cursor-pointer">
-          usuario
+        <a x-show="open" x-transition class="pr-2 cursor-pointer" href="{{ route('evaluacion.user.admin') }}">
+          Usuario
         </a>
       </div>
       <div class="mb-2 flex items-center shadow-lg rounded-md w-[fit-content] hover:bg-[#6b2b83] hover:text-white">
         <div class="p-2 flex" @click="open = !open">
           <i class="fa-solid fa-user"></i>
         </div>
-        <a x-show="open" x-transition class="pr-2 cursor-pointer">
-          Categorias
+        <a x-show="open" x-transition class="pr-2 cursor-pointer" href="{{ route('evaluacion.categoria.admin') }}">
+          Categoría
         </a>
       </div>
     </div>

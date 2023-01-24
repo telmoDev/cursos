@@ -19,7 +19,7 @@
                     {{ $key + 1 }}
                 </td>
                 <td>
-                    <div style="background-image: url({{ $car->curso->imagen() }})" class="h-32 w-32 bg-center py-2"></div>
+                    <div style="background-image: url({{ $car->curso->getImagen() }})" class="h-32 w-32 bg-center py-2"></div>
                 </td>
                 <td class="text-center px-3">
                     {{ $car->curso->nombre }}
