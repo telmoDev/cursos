@@ -39,7 +39,7 @@ class Curso extends Model
     ];
 
 
-    public function imagen()
+    public function getImagen()
     {
       if ($this->imagen) {
         return route('img.bg.curso', ['folder' => $this->id, 'filename' => $this->imagen]);

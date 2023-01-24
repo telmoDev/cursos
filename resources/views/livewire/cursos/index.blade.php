@@ -8,12 +8,10 @@
                             <h1 class="color-[#3f3f3f] title text-2xl  font-bold">{{ $curso->nombre }}</h1>
                             <div class="color-[#3f3f3f] mt-6 title text-4xl font-bold">{{ $curso->descripcion_corta }}
                             </div>
-                            <div class="color-[#3f3f3f] text-lg mt-6">{{ $curso->descripcion_larga }}</div>
+                            <div class="color-[#3f3f3f] size-19 mt-6">{{ $curso->descripcion_larga }}</div>
                         </div>
                         <div class="w-4/12 shadow-xl rounded-lg">
-                            <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="400"
-                                height="250" frameborder="0" allow="autoplay; fullscreen; picture-in-picture"
-                                allowfullscreen></iframe>
+                          <iframe src="https://player.vimeo.com/video/777479595?h=6e5d789c0a&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="400" height="250" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="1.1.1. La Tierra forma y dimensiones"></iframe>
                             <div class="p-6">
                                 <div class="color-[#3f3f3f] font-bold">{{ $curso->nombre }}</div>
                                 <div class="color-[#3f3f3f] font-bold">$. {{ $curso->precio }}</div>

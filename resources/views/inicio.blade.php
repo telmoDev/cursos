@@ -17,9 +17,9 @@
             </div>
         </div>
         <div class="modulo relative w-full flex flex-center flex-col pt-6">
-            <div class="titulo text-2xl text-[#80009d] mx-auto font-bold max-w-xl text-center">Estudia como si vieras una serie de Netﬂix con nuestros cursos más populares</div>
+            <div class="titulo size-30 text-[#80009d] mx-auto font-bold max-w-xl text-center">Estudia como si vieras una serie de Netﬂix con nuestros cursos más populares</div>
             <livewire:inicio />
-            <a class="descubrir-programas text-[#ff2d00] text-xl text-center font-bold hover:underline mt-5 mb-5" href="{{ route('curso.list') }}">
+            <a class="descubrir-programas text-[#ff2d00] size-25 text-center font-bold hover:underline mt-5 mb-5" href="{{ route('curso.list') }}">
                 Descubrir todos los programas
             </a>
         </div>
@@ -30,9 +30,9 @@
                     <div class="text-[#80009d] font-bold text-xl pl-6 mb-4">
                         <h3>Clases de 15 minutos que puedes hacer cuando y donde quieras</h3>
                     </div>
-                    <div class="text-[#878787] mb-6 pl-8">
+                    <div class="text-[#878787] mb-6 pl-8 size-17">
                         “Sin dudar, una de las mejores experiencias de aprendizaje, no es necesario estar en el mismo país, el mismo idioma o el mismo horario para conocer y aprender.
-                        <span class="italic font-bold" >Gracias por hacer esto posible para todos aquellos que queremos seguir aprendiendo y creciendo en todo momento</span>
+                        <span class="italic font-bold size-17" >Gracias por hacer esto posible para todos aquellos que queremos seguir aprendiendo y creciendo en todo momento</span>
                     </div>
                     <div class="border-t-2 border-[#80009d] flex items-center pt-6 mb-3">
                         <div class="w-2/3">
@@ -61,7 +61,7 @@
                     <div class="text-[#80009d] font-bold text-xl pr-6 mb-4">
                         <h3>Aprende con los mayores emprendedores y directivos de éxito</h3>
                     </div>
-                    <div class="text-[#878787] mb-6 pr-8">
+                    <div class="text-[#878787] mb-6 pr-8 size-17">
                     “Profesionalmente, se desvelan conocimientos de primera, experiencias, anécdotas y materiales, de la mano de un grupo
                     <span class="italic font-bold" >TOP de profesionales y empresarios de Clase Mundial, con quienes muy difícilmente tendríamos acceso a; para compartirnos su Know-How, su experiencia-vivencias</span>
                     , que enriquecen aún más todos los casos de negocio que nos son presentados a lo largo de todo el máster.”
@@ -86,7 +86,7 @@
                     <div class="text-[#80009d] font-bold text-xl pl-6 mb-4">
                         <h3>Conoce a tu próximo socio o descubre tu próxima oportunidad laboral </h3>
                     </div>
-                    <div class="text-[#878787] mb-6 pl-8">
+                    <div class="text-[#878787] mb-6 pl-8 size-17">
                         “He tenido una grata experiencia con el networking. Desde que me uní a la comunidad he tenido varios contactos en común y nuevos. Es una gran posibilidad para seguir haciendo crecer tu comunidad y realizar networking con otros profesionales.”
                     </div>
                     <div class="border-t-2 border-[#80009d] flex items-center pt-6 mb-3">
@@ -108,7 +108,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-1/2 pt-6">
             <div class="flex w-full h-full">
                 <div class="w-3/5 bg-gray-300">
-                    <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="480" height="300" frameborder="0" class="w-full h-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height:421px" frameborder="0" class="w-full h-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="w-2/5 bg-[#80009d]">
                         <div class="text-white py-16 px-6 text-right" >
@@ -133,26 +133,23 @@
             <div class="example-box">
                 <div class="carousel-multiple-items">
                     <div>
-                    <div class="box">{{-- <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="480" height="300" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}</div>
+                    <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
                     </div>
                     <div>
-                    <div class="box">{{-- <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="480" height="300" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}</div>
-                    </div>
-                    <div>
-                    <div class="box">{{-- <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="480" height="300" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}</div>
-                    </div>
-                    <div>
-                    <div class="box">{{-- <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="480" height="300" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}</div>
-                    </div>
-                    <div>
-                    <div class="box">{{-- <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="480" height="300" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}</div>
-                    </div>
-                    <div>
-                    <div class="box">{{-- <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="480" height="300" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}</div>
-                    </div>
-                    <div>
-                    <div class="box">{{-- <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="480" height="300" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe> --}}</div>
-                    </div>
+                      <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                      </div>
+                      <div>
+                        <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                        </div>
+                        <div>
+                          <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                          </div>
+                          <div>
+                            <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                            </div>
+                            <div>
+                              <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                              </div>
                 </div>
                 </div>
             </div>

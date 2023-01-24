@@ -30,6 +30,7 @@
                                 </a>
                             </div>
                         @endif
+                        @if ($loop->index == 0)
                         <div class="text-center  text-2xl font-bold mt-4">
                             <x-jet-secondary-button type="text"
                                 class="bg-[#6b2b83] text-white hover:text-white hover:opacity-90 active:bg-[#6b2b83] focus:border-none focus:shadow-none active:text-white"
@@ -38,6 +39,21 @@
                         </div>
                         <div class="text-center flex justify-center items-center text-sm font-bold mt-4"><span
                                 class="mr-1">@include('livewire.cursos._icons.clock')</span>Toma 5 min</div>
+
+                        @endif
+
+                        @if ($loop->index == 1)
+                        <div>
+                          <iframe title="vimeo-player" src="https://player.vimeo.com/video/777479595?h=6e5d789c0a" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+                        </div>
+
+                        @endif
+                        @if ($loop->index == 2)
+                        <div>
+                          <iframe title="vimeo-player" src="https://player.vimeo.com/video/777493811?h=48b7774093" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+                        </div>
+
+                        @endif
                     </div>
                     @if (0)
                         <div class="w-1/2 h-screen">

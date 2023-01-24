@@ -1,5 +1,5 @@
 <x-guest-layout>
-  <div x-data="{open: false}" class="flex ">
+  <div x-data="{open: true}" class="flex ">
     <div class="h-screen bg-white max-w-7xl px-2 pt-2 shadow-lg"  x-transition>
       <div class="p-2 bg-[#6b2b83] text-white shadow-lg rounded-md flex w-[fit-content] mb-3" @click="open = !open">
         <i x-show="open" x-transition class="fa-solid fa-xmark"></i>
@@ -23,6 +23,14 @@
         </div>
         <a x-show="open" x-transition class="pr-2 cursor-pointer">
           usuario
+        </a>
+      </div>
+      <div class="mb-2 flex items-center shadow-lg rounded-md w-[fit-content] hover:bg-[#6b2b83] hover:text-white">
+        <div class="p-2 flex" @click="open = !open">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <a x-show="open" x-transition class="pr-2 cursor-pointer">
+          Categorias
         </a>
       </div>
     </div>

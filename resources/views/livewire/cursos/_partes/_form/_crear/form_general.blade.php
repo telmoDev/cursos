@@ -161,8 +161,8 @@
         <textarea
             class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
             wire:model.lazy="curso.bloque2_detalle"></textarea>
-        @error("secciones.{$key}.contenido.{$key}.detalle")
+        {{-- @error("secciones.{$key}.contenido.{$key}.detalle")
                     <div class="text-red-600 text-sm">{{ $message }}</div>
-                @enderror
+                @enderror --}}
     </div>
 </div>

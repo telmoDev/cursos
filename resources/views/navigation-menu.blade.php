@@ -13,29 +13,29 @@
 
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-jet-nav-link href="{{ route('curso.list') }}" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] flex text-md font-bold {{ request()->routeIs('curso.list') ? 'text-[#5E2880] border-[#DB3634]' : '' }}" :active="request()->routeIs('curso.list')">
+                        <x-jet-nav-link href="{{ route('curso.list') }}" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] flex size-18 font-acephimere {{ request()->routeIs('curso.list') ? 'text-[#5E2880] border-[#DB3634]' : '' }}" :active="request()->routeIs('curso.list')">
                             {{ __('Cursos') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="#" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] text-md font-bold " >
+                        <x-jet-nav-link href="#" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] size-18 font-acephimere" >
                             {{ __('Recursos') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="#" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] text-md font-bold " >
+                        <x-jet-nav-link href="#" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] size-18 font-acephimere" >
                             {{ __('Diplomados') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="#" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] text-md font-bold " >
+                        <x-jet-nav-link href="#" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] size-18 font-acephimere" >
                             {{ __('Membresías') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('eventos.index') }}" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] text-md font-bold {{ request()->routeIs('eventos.index') ? 'text-[#5E2880] border-[#DB3634]' : '' }}" :active="request()->routeIs('eventos.index')">
+                        <x-jet-nav-link href="{{ route('eventos.index') }}" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] font-acephimere size-18 {{ request()->routeIs('eventos.index') ? 'text-[#5E2880] border-[#DB3634]' : '' }}" :active="request()->routeIs('eventos.index')">
                             {{ __('Eventos') }}
                         </x-jet-nav-link>
                         @auth
-                            <x-jet-nav-link href="{{ route('dashboard') }}" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] text-md font-bold {{ request()->routeIs('dashboard') ? 'text-[#5E2880] border-[#DB3634]' : '' }}" :active="request()->routeIs('dashboard')">
+                            <x-jet-nav-link href="{{ route('dashboard') }}" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] size-18 font-bold {{ request()->routeIs('dashboard') ? 'text-[#5E2880] border-[#DB3634]' : '' }}" :active="request()->routeIs('dashboard')">
                                 {{ __('Mis Cursos ') }}
                             </x-jet-nav-link>
                         @endauth
                         @guest
-                          <x-jet-nav-link href="{{ route('login') }}" class=" text-white uppercase text-md bg-[#6b2b83] " :active="request()->routeIs('login')">
-                              <span class="px-2">{{ __('Registrate') }}</span>
+                          <x-jet-nav-link href="{{ route('login') }}" class=" text-white uppercase  bg-[#6b2b83] " :active="request()->routeIs('login')">
+                              <span class="px-6 py-2 size-18 font-acephimere">{{ __('Registrate') }}</span>
                           </x-jet-nav-link>
                         @endguest
 
@@ -159,10 +159,10 @@
                 </div>
             @else
                 <div class="ml-3 relative">
-                    <x-jet-nav-link href="{{ route('login') }}" class="text-white uppercase text-lg" :active="request()->routeIs('login')">
+                    <x-jet-nav-link href="{{ route('login') }}" class="text-white slider-principal uppercase text-lg" :active="request()->routeIs('login')">
                         {{ __('Ingreso') }}
                     </x-jet-nav-link>
-                    <x-jet-nav-link href="{{ route('register') }}" class="text-white uppercase text-lg" :active="request()->routeIs('register')">
+                    <x-jet-nav-link href="{{ route('register') }}" class="text-white slider-principal uppercase text-lg" :active="request()->routeIs('register')">
                         {{ __('Registro') }}
                     </x-jet-nav-link>
                 </div>

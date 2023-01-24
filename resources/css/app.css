@@ -6,12 +6,12 @@
 
 @font-face {
     font-family: "Acephimere";
-    src: url("../fonts/Acephimere/Acephimere.eot");
-    src: url("../fonts/Acephimere/Acephimere.eot") format("embedded-opentype"),
-        url("../fonts/Acephimere/Acephimere.woff2") format("woff2"),
-        url("../fonts/Acephimere/Acephimere.woff") format("woff"),
-        url("../fonts/Acephimere/Acephimere.ttf") format("truetype"),
-        url("../fonts/Acephimere/Acephimere.svg#Acephimere") format("svg");
+    src: url("../fonts/acephimere/Acephimere.eot");
+    src: url("../fonts/acephimere/Acephimere.eot") format("embedded-opentype"),
+        url("../fonts/acephimere/Acephimere.woff2") format("woff2"),
+        url("../fonts/acephimere/Acephimere.woff") format("woff"),
+        url("../fonts/acephimere/Acephimere.ttf") format("truetype"),
+        url("../fonts/acephimere/Acephimere.svg#Acephimere") format("svg");
 }
 
 .slider-principal {
@@ -283,4 +283,56 @@ img {
 .scroll-custom::-webkit-scrollbar-track:hover,
 .scroll-custom::-webkit-scrollbar-track:active {
 background: #d4d4d4;
+}
+
+.size-17{
+  font-size: 17px;
+}
+.size-18{
+  font-size: 18px;
+}
+.size-19{
+  font-size: 19px;
+}
+.size-30{
+  font-size: 30px;
+}
+.size-25{
+  font-size: 25px;
+}
+.ec__nav {
+  top: 45%;
+  width: 40px !important;
+  background: white;
+  height: 35px !important;
+  transform: none !important;
+  border: none !important;
+}
+.ec__nav.ec__nav--prev{
+  left: 0;
+}
+.ec__nav.ec__nav--next{
+  right: 0;
+}
+.ec__nav.ec__nav--prev::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-top: 3px solid #DB310B;
+  border-right: 3px solid #DB310B;
+  transform: rotate(-135deg);
+  right: 2px;
+  top: 10px;
+}
+.ec__nav.ec__nav--next::after {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-top: 3px solid #DB310B;
+  border-right: 3px solid #DB310B;
+  transform: rotate(45deg);
+  left: 2px;
+  top: 10px;
 }
