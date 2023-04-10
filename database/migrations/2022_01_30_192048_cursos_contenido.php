@@ -21,7 +21,8 @@ class CursosContenido extends Migration
             $table->string("slug")->nullable();
             $table->string("contenido_download")->nullable();
             $table->string("img_fondo")->nullable();
-            $table->string("recurso")->nullable();
+            $table->string("img_contenido")->nullable();
+            $table->text("recurso")->nullable();
 
             $table->unsignedBigInteger('cursos_contenido_tipo_id');
             $table->foreign('cursos_contenido_tipo_id')->references('id')->on('cursos_contenido_tipo')->onDelete('cascade');

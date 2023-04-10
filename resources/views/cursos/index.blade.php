@@ -6,6 +6,9 @@
     </x-slot>
 
     <div >
+      <div class="py-2 bg-[#6C2B84]">
+
+      </div>
       <livewire:cursos.index :curso="$curso" />
     </div>
 

@@ -23,27 +23,7 @@ class Alumno extends Component
         $this->curso = Curso::where("slug", $this->curso_slug)->first();
         $this->mostrar_curso = Contenido::where("slug", $this->seccion)->first();
         $this->seccion = $this->mostrar_curso->seccion->id;
-        $seccionContenido = Contenido::where("cursos_seccione_id", $this->seccion)->get();
-        $contenido_1 = $seccionContenido->filter(function( $item ){
-          if ($item->cursos_contenido_tipo_id == 1) {
-            return $item;
-          }
-        });
-
-        $contenido_2 = $seccionContenido->filter(function( $item ){
-          if ($item->cursos_contenido_tipo_id == 2) {
-            return $item;
-          }
-        });
-
-        $contenido_3 = $seccionContenido->filter(function( $item ){
-          if ($item->cursos_contenido_tipo_id == 3) {
-            return $item;
-          }
-        });
-
-        $this->contenido = [...$contenido_1, ...$contenido_2, ...$contenido_3];
-        // dd(count($this->contenido));
+        $this->contenido = Contenido::where("cursos_seccione_id", $this->seccion)->get();
     }
 
     public function render()

@@ -1,5 +1,5 @@
 <div class="btn text-lg mt-2 flex justify-end px-4">
-    <x-jet-button class="add" wire:click="add" >
+    <x-jet-button class="add w-full text-center block" style="display: block" wire:click="add" >
         {{ __('Agregar al carrito') }}
     </x-jet-button>
     @auth

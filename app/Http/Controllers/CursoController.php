@@ -45,14 +45,14 @@ class CursoController extends Controller
         return view("cursos.list");
     }
 
-    public function crear()
-    {
-        return view("cursos.crear");
-    }
+    // public function crear()
+    // {
+    //     return view("cursos.crear");
+    // }
 
-    public function editar(Request $request, $id)
+    public function crear(Request $request, $id = null)
     {
-        return view("cursos.editar", compact('id'));
+        return view("cursos.crear", compact('id'));
     }
 
     public function administrador()

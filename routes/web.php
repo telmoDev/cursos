@@ -24,8 +24,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () { return view('inicio'); })->name("home");
-Route::get("/eventos",[EventoController::class, "index"] )->name("eventos.index");
+Route::get('/', function () {
+  return view('inicio');
+})->name("home");
+Route::get("/eventos", [EventoController::class, "index"])->name("eventos.index");
 Route::get('/cursos', [CursoController::class, 'list'])->name('curso.list');
 Route::get('/curso/{slug}', [CursoController::class, 'index'])->name('curso');
 Route::get('/curso/{slug}/tema/{seccion}', [CursoController::class, 'alumno'])->name('curso.seccion');
@@ -35,35 +37,35 @@ Route::get('/tema-de-interes/{slug}', [TemaController::class, 'list'])->name('te
 
 Route::get('/autor/{slug}', [AutorController::class, 'list'])->name('autor.list');
 
-Route::get('carrito', [CarritoController::class, 'carrito'] )->name('carrito');
+Route::get('carrito', [CarritoController::class, 'carrito'])->name('carrito');
 
 // http://127.0.0.1:8000/img-bg/cursos/prueba-4/prueba-4.jpg
-Route::get('img-bg/cursos/{folder}/{filename}', function($folder,$filename) {
-// Route::get('img-bg/{slug}', function($slug) {
-    $path = storage_path()."/app/cursos/{$folder}/{$filename}";
-    if(! \File::exists($path)) {
-        return response()->json(['message' => 'Image not found.'], 404);
-    }
-    $file = \File::get($path);
-    $type = \File::mimeType($path);
+Route::get('img-bg/cursos/{folder}/{filename}', function ($folder, $filename) {
+  // Route::get('img-bg/{slug}', function($slug) {
+  $path = storage_path() . "/app/cursos/{$folder}/{$filename}";
+  if (!\File::exists($path)) {
+    return response()->json(['message' => 'Image not found.'], 404);
+  }
+  $file = \File::get($path);
+  $type = \File::mimeType($path);
 
-    $response = response()->make($file, 200);
-    $response->header("Content-Type", $type);
-    return $response;
+  $response = response()->make($file, 200);
+  $response->header("Content-Type", $type);
+  return $response;
 })->name('img.bg.curso');
 
-Route::get('img-bg/cursos/bg/', function() {
-      $path = storage_path()."/app/hand.jpg";
-      if(! \File::exists($path)) {
-          return response()->json(['message' => 'Image not found.'], 404);
-      }
-      $file = \File::get($path);
-      $type = \File::mimeType($path);
+Route::get('img-bg/cursos/bg/', function () {
+  $path = storage_path() . "/app/hand.jpg";
+  if (!\File::exists($path)) {
+    return response()->json(['message' => 'Image not found.'], 404);
+  }
+  $file = \File::get($path);
+  $type = \File::mimeType($path);
 
-      $response = response()->make($file, 200);
-      $response->header("Content-Type", $type);
-      return $response;
-  })->name('img.cursos.bg');
+  $response = response()->make($file, 200);
+  $response->header("Content-Type", $type);
+  return $response;
+})->name('img.cursos.bg');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
@@ -74,28 +76,33 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
   Route::get('/administrador/categorias', [CategoriaController::class, 'index'])->name('evaluacion.categoria.admin');
   Route::get('/administrador/usuarios', [UserGeneralController::class, 'index'])->name('evaluacion.user.admin');
 
-    Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
-    Route::get('/usuarios/permisos', [PermissionController::class, 'index'])->name('usuarios.permisos');
-    Route::get('/usuarios/roles', [RoleController::class, 'index'])->name('usuarios.roles');
-    // Route::get('/curso/{slug}', [RoleController::class, 'index'])->name('curso');
-    Route::get("/eventos/administrar",[EventoController::class, "administrar"] )->name("eventos.administrar");
-    Route::get('/cursos/crear', [CursoController::class, 'crear'])->name('curso.crear');
-    Route::get('/cursos/editar/{id}', [CursoController::class, 'editar'])->name('curso.editar');
-    Route::get('contenido/curso/{folder}/download/{folder2}/{filename}', function($folder, $folder2, $filename) {
-      $path = storage_path()."/app/cursos/{$folder}/download/{$folder2}/{$filename}";
-      $response = response()->download($path);
-      return $response;
-    })->name('contenido.download.file');
-    Route::get('contenido/curso/{folder}/fondo/{folder2}/{filename}', function($folder, $folder2, $filename) {
-      $path = storage_path()."/app/cursos/{$folder}/fondo/{$folder2}/{$filename}";
-      if(! \File::exists($path)) {
-          return response()->json(['message' => 'Image not found.'], 404);
-      }
-      $file = \File::get($path);
-      $type = \File::mimeType($path);
+  Route::get('/dashboard', function () {
+    return view('dashboard');
+  })->name('dashboard');
+  Route::get('/usuarios/permisos', [PermissionController::class, 'index'])->name('usuarios.permisos');
+  Route::get('/usuarios/roles', [RoleController::class, 'index'])->name('usuarios.roles');
+  // Route::get('/curso/{slug}', [RoleController::class, 'index'])->name('curso');
+  Route::get("/eventos/administrar", [EventoController::class, "administrar"])->name("eventos.administrar");
 
-      $response = response()->make($file, 200);
-      $response->header("Content-Type", $type);
-      return $response;
-    })->name('contenido.fondo.img');
+  Route::get('/cursos/crear', [CursoController::class, 'crear'])->name('curso.crear');
+  Route::get('/cursos/editar/{id?}', [CursoController::class, 'crear'])->name('curso.editar');
+
+  Route::get('contenido/curso/{folder}/download/{folder2}/{filename}', function ($folder, $folder2, $filename) {
+    $path = storage_path() . "/app/cursos/{$folder}/download/{$folder2}/{$filename}";
+    $response = response()->download($path);
+    return $response;
+  })->name('contenido.download.file');
+
+  Route::get('contenido/curso/{folder}/fondo/{folder2}/{filename}', function ($folder, $folder2, $filename) {
+    $path = storage_path() . "/app/cursos/{$folder}/fondo/{$folder2}/{$filename}";
+    if (!\File::exists($path)) {
+      return response()->json(['message' => 'Image not found.'], 404);
+    }
+    $file = \File::get($path);
+    $type = \File::mimeType($path);
+
+    $response = response()->make($file, 200);
+    $response->header("Content-Type", $type);
+    return $response;
+  })->name('contenido.fondo.img');
 });

@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             @forelse( $carrito as $key => $car )
-            <tr class="border-b-2 pb-2 mb-2">
+            <tr class="border-b-2 pb-2 mb-2 fila-curso" id="{{ $car->id }}">
                 <td class="text-center">
                     {{ $key + 1 }}
                 </td>
@@ -69,62 +69,74 @@
     </div>
 
     <script>
-    let paymentCheckout = new PaymentCheckout.modal({
-        client_app_code: 'TPP3-EC-CLIENT', // Client Credentials
-        client_app_key: 'ZfapAKOk4QFXheRNvndVib9XU3szzg', // Client Credentials
-        locale: 'es', // User's preferred language (es, en, pt). English will be used by default.
-        env_mode: 'stg', // `prod`, `stg`, `local` to change environment. Default is `stg`
-        onOpen: function () {
-        console.log('modal open');
-        },
-        onClose: function () {
-        console.log('modal closed');
-        },
-        onResponse: function (response) { // The callback to invoke when the Checkout process is completed
-
-        /*
-            In Case of an error, this will be the response.
-            response = {
-            "error": {
-                "type": "Server Error",
-                "help": "Try Again Later",
-                "description": "Sorry, there was a problem loading Checkout."
-            }
-            }
-
-            When the User completes all the Flow in the Checkout, this will be the response.
-            response = {
-            "transaction":{
-                "status": "success", // success or failure
-                "id": "CB-81011", // transaction_id
-                "status_detail": 3 // for the status detail please refer to: https://paymentez.github.io/api-doc/#status-details
-            }
-            }
-        */
-        console.log('modal response');
-        document.getElementById('response').innerHTML = JSON.stringify(response);
+      // temporal
+      let btnOpenCheckout = document.querySelector('.js-payment-checkout');
+      let filaCursos = document.getElementsByClassName('fila-curso');
+      btnOpenCheckout.addEventListener('click', function () {
+        let ids = []
+        for (const iterator of filaCursos) {
+          ids.push(iterator.id)
         }
-    });
+        console.log(ids)
+        @this.idCursos = ids
+      });
+      // end temporal
+    // let paymentCheckout = new PaymentCheckout.modal({
+    //     client_app_code: 'TPP3-EC-CLIENT', // Client Credentials
+    //     client_app_key: 'ZfapAKOk4QFXheRNvndVib9XU3szzg', // Client Credentials
+    //     locale: 'es', // User's preferred language (es, en, pt). English will be used by default.
+    //     env_mode: 'stg', // `prod`, `stg`, `local` to change environment. Default is `stg`
+    //     onOpen: function () {
+    //     console.log('modal open');
+    //     },
+    //     onClose: function () {
+    //     console.log('modal closed');
+    //     },
+    //     onResponse: function (response) { // The callback to invoke when the Checkout process is completed
 
-    let btnOpenCheckout = document.querySelector('.js-payment-checkout');
-    btnOpenCheckout.addEventListener('click', function () {
-        paymentCheckout.open({
-        user_id: '1234',
-        user_email: 'jhon@doe.com', //optional
-        user_phone: '7777777777', //optional
-        order_description: '1 Green Salad',
-        order_amount: {{ number_format( $subtotal + round( $subtotal * 0.14 , 2) , 2) }},
-        order_vat: 0,
-        order_reference: '#234323411',
-        //order_installments_type: 2, // optional: The installments type are only available for Ecuador and Mexico. The valid values are: https://paymentez.github.io/api-doc/#payment-methods-cards-debit-with-token-base-case-installments-type
-        //order_taxable_amount: 0, // optional: Only available for Ecuador. The taxable amount, if it is zero, it is calculated on the total. Format: Decimal with two fraction digits.
-        //order_tax_percentage: 10 // optional: Only available for Ecuador. The tax percentage to be applied to this order.
-        });
-    });
+    //     /*
+    //         In Case of an error, this will be the response.
+    //         response = {
+    //         "error": {
+    //             "type": "Server Error",
+    //             "help": "Try Again Later",
+    //             "description": "Sorry, there was a problem loading Checkout."
+    //         }
+    //         }
 
-    window.addEventListener('popstate', function () {
-        paymentCheckout.close();
-    });
+    //         When the User completes all the Flow in the Checkout, this will be the response.
+    //         response = {
+    //         "transaction":{
+    //             "status": "success", // success or failure
+    //             "id": "CB-81011", // transaction_id
+    //             "status_detail": 3 // for the status detail please refer to: https://paymentez.github.io/api-doc/#status-details
+    //         }
+    //         }
+    //     */
+    //     console.log('modal response');
+    //     document.getElementById('response').innerHTML = JSON.stringify(response);
+    //     }
+    // });
+
+    // let btnOpenCheckout = document.querySelector('.js-payment-checkout');
+    // btnOpenCheckout.addEventListener('click', function () {
+    //     paymentCheckout.open({
+    //     user_id: '1234',
+    //     user_email: 'jhon@doe.com', //optional
+    //     user_phone: '7777777777', //optional
+    //     order_description: '1 Green Salad',
+    //     order_amount: {{ number_format( $subtotal + round( $subtotal * 0.14 , 2) , 2) }},
+    //     order_vat: 0,
+    //     order_reference: '#234323411',
+    //     //order_installments_type: 2, // optional: The installments type are only available for Ecuador and Mexico. The valid values are: https://paymentez.github.io/api-doc/#payment-methods-cards-debit-with-token-base-case-installments-type
+    //     //order_taxable_amount: 0, // optional: Only available for Ecuador. The taxable amount, if it is zero, it is calculated on the total. Format: Decimal with two fraction digits.
+    //     //order_tax_percentage: 10 // optional: Only available for Ecuador. The tax percentage to be applied to this order.
+    //     });
+    // });
+
+    // window.addEventListener('popstate', function () {
+    //     paymentCheckout.close();
+    // });
     </script>
 
 </div>

@@ -30,16 +30,16 @@ class CursoSeeder extends Seeder
         Categoria::factory(10)->create();
 
         $new = new ContenidoTipo();
-        $new->titulo = "Tipo 1";
+        $new->titulo = "Introduccion";
         $new->save();
         $new = new ContenidoTipo();
-        $new->titulo = "Tipo 2";
+        $new->titulo = "Video";
         $new->save();
         $new = new ContenidoTipo();
-        $new->titulo = "Tipo 3";
+        $new->titulo = "Descarga";
         $new->save();
         $new = new ContenidoTipo();
-        $new->titulo = "Tipo 4";
+        $new->titulo = "Escrito";
         $new->save();
 
         Curso::factory(25)

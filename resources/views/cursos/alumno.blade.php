@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="pb-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white  sm:rounded-lg">
                 <livewire:cursos.alumno :curso_slug="$curso" :seccion="$seccion" />

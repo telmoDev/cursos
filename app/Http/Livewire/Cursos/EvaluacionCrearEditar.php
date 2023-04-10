@@ -10,34 +10,32 @@ use Livewire\Component;
 
 class EvaluacionCrearEditar extends Component
 {
-  public $preguntas;
+  public $preguntas = [];
   public $evaluacion;
   public $cursos;
-  public $cursoId;
   public $cursoNombre;
   public $cursoSerch = "";
 
   public function mount($id = null)
   {
-    // dd($id);
-    $this->cursos = new Collection();
+
+    $this->evaluacion = Evaluacion::where('id', $id)->firstOr(fn () => new Evaluacion());
+
     $this->cursos = Curso::all();
-    $this->evaluacion = Evaluacion::where('id', $id)->firstOr(function () { return new Evaluacion(); });
 
-    $this->cursoId = $this->evaluacion->cursos_id;
-    $this->cursoNombre = $this->evaluacion->curso ? $this->evaluacion->curso->nombre : $this->evaluacion->curso;
+    $this->cursoNombre = $this->evaluacion->curso ? $this->evaluacion->curso->nombre : '';
 
-    $preguntas = EvaluacionPregunta::where('curso_evaluacion_id', $this->evaluacion->id)->get();
-    if (count($preguntas)) {
-      $this->preguntas = $preguntas;
+    $preguntaslol = EvaluacionPregunta::where('curso_evaluacion_id', $this->evaluacion->id)->get();
+    if (count($preguntaslol)) {
+      $this->preguntas = [...$preguntaslol];
     }
 
-    $this->preguntas = [];
   }
 
   protected $rules = [
     'evaluacion.titulo' => 'required',
-    'cursoId' => 'required',
+    'preguntas.*.titulo' => 'required',
+
   ];
 
   public function agregarPregunta()
@@ -49,33 +47,26 @@ class EvaluacionCrearEditar extends Component
     ];
   }
 
-  // public function update($name, $value)
-  // {
-  //   if($name === 'getDataCurso'){
-  //     $this->cursoId = $this->cursoId;
-  //     $this->cursoNombre = $this->cursoNombre;
-  //   }
-  // }
-
-  public function getDataCurso($id, $nombre)
+  public function agregarRepuesta($key)
   {
-    // dd('Prueba');
+    $this->preguntas[$key]['respuestas'][] = [
+      'id' => null,
+      'titulo' => '',
+      'respuestas' => []
+    ];
+  }
+
+  public function getDataDeCurso($idcurso, $nombre)
+  {
+    $this->evaluacion->cursos_id = $idcurso;
     $this->cursoNombre = $nombre;
-    $this->cursoId = $id;
-    // dd($this->cursoNombre);
+    $this->cursoSerch = '';
   }
 
   public function guardar()
   {
-    $this->validate();
-    Evaluacion::updateOrCreate(
-      [ 'id' => $this->id],
-      [
-        'titulo' => $this->evaluacion->titulo,
-        'cursos_id' => $this->cursoId
-      ]
-    );
-
+    // $this->validate();
+    $this->evaluacion->save();
   }
 
   public function render()

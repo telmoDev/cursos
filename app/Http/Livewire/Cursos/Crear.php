@@ -9,6 +9,7 @@ use App\Models\Cursos\ContenidoTipo;
 use App\Models\Cursos\PaginaBloqueCursoModel;
 use App\Models\Cursos\Secciones;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
@@ -22,7 +23,11 @@ class Crear extends Component
   public $contenidoTipos;
   public $citas;
 
+  public $enlace;
+  public $hasEnlace;
+
   public $imgCurso;
+  public $hasImgCurso;
 
   protected $rules = [
     'curso.nombre' => 'required',
@@ -50,12 +55,16 @@ class Crear extends Component
     'secciones.*.contenido.*.cursos_contenido_tipo_id' => 'required',
   ];
 
-  public function mount()
+  public function mount($id = null)
   {
-    $this->curso = new Curso;
+    $this->curso = Curso::where('id', $id)->firstOr(fn () =>  new Curso());
+    $this->enlace = env('APP_URL') . '/curso/' . $this->curso->slug;
+    $this->hasEnlace = $this->curso->slug;
+    $this->imgCurso = $this->curso->imagen;
+    $this->hasImgCurso = $this->curso->imagen;
     $this->contenidoTipos = ContenidoTipo::all(['id', 'titulo']);
-    $this->secciones = [];
-    $this->citas = [];
+    $this->getSecciones();
+    $this->getCitas();
   }
   public function render()
   {
@@ -68,20 +77,40 @@ class Crear extends Component
       $this->curso->slug = Str::slug($this->curso->nombre, '-');
     }
   }
+  public function getSecciones()
+  {
+    $secciones = Secciones::where('cursos_id', $this->curso->id)->get();
+    $this->secciones = [...$secciones];
+  }
+
+  public function getCitas()
+  {
+    $citas = Cita::where('cursos_id', $this->curso->id)->get();
+    $this->citas = [...$citas];
+  }
   public function agregar_seccion()
   {
     $this->secciones[] = [
+      'id' => null,
       'titulo' => '',
       'contenido' => [],
     ];
   }
-  public function borrarImagen()
+  public function agregar_cita()
   {
-    $this->imgCurso = null;
+    $this->citas[] = [
+      'id' => null,
+      'autor' => '',
+      'profesion' => '',
+      'imagen' => '',
+      'detalle' => ''
+    ];
   }
+
   public function agregar_contenido($key)
   {
     $this->secciones["{$key}"]['contenido'][] = [
+      'id' => null,
       'titulo' => '',
       'subtitulo' => '',
       'detalle' => '',
@@ -91,43 +120,66 @@ class Crear extends Component
       'recurso' => ''
     ];
   }
-
-  public function agregar_cita()
+  public function borrarImagen()
   {
-    $this->citas[] = [
-      'autor' => '',
-      'profesion' => '',
-      'imagen' => '',
-      'detalle' => ''
-    ];
+    if ($this->hasImgCurso) {
+      Storage::delete("cursos/{$this->curso->slug}/{$this->curso->imagen}");
+      $this->curso->imagen = null;
+      $this->curso->update();
+      $this->imgCurso = null;
+      $this->hasImgCurso = null;
+    } else {
+      $this->imgCurso = null;
+    }
   }
-
-  public function borrarCita($key)
-  {
-    unset($this->citas[$key]);
-    $this->citas = array_values($this->citas);
-  }
-
   public function borrarSeccion($seccionKey)
   {
-    unset($this->secciones[$seccionKey]);
-    $this->secciones = array_values($this->secciones);
+    $seccion = Secciones::find($seccionKey);
+    $seccion->delete();
+    $this->secciones = [];
+    $this->getSecciones();
   }
 
-  public function borrarContenido($seccionKey, $contenidoKey)
+  public function borrarContenido($contenidoKey)
   {
-    unset($this->secciones[$seccionKey]['contenido'][$contenidoKey]);
-    $this->secciones = array_values($this->secciones);
+    $contenido = Contenido::find($contenidoKey);
+    $contenido->delete();
+    $this->secciones = [];
+    $this->getSecciones();
+  }
+
+  public function borrarCita($id)
+  {
+    $cita = Cita::find($id);
+    $cita->delete();
+    $this->citas = [];
+    $this->getCitas();
   }
 
   public function borrarContenidoDownload($seccionKey, $contenidoKey)
   {
-    $this->secciones[$seccionKey]['contenido'][$contenidoKey]['contenido_download'] = null;
+    $content_id = $this->secciones[$seccionKey]['contenido'][$contenidoKey]['id'];
+    $content_file = $this->secciones[$seccionKey]['contenido'][$contenidoKey]['contenido_download'];
+    $path = "cursos/{$this->curso->id}/download/{$content_id}/{$content_file}";
+    if (Storage::exists($path)) {
+      Storage::delete($path);
+      $this->secciones[$seccionKey]['contenido'][$contenidoKey]['contenido_download'] = null;
+    } else {
+      $this->secciones[$seccionKey]['contenido'][$contenidoKey]['contenido_download'] = null;
+    }
   }
 
   public function borrarImgFondo($seccionKey, $contenidoKey)
   {
-    $this->secciones[$seccionKey]['contenido'][$contenidoKey]['img_fondo'] = null;
+    $content_id = $this->secciones[$seccionKey]['contenido'][$contenidoKey]['id'];
+    $content_file = $this->secciones[$seccionKey]['contenido'][$contenidoKey]['img_fondo'];
+    $path = "cursos/{$this->curso->id}/fondo/{$content_id}/{$content_file}";
+    if (Storage::exists($path)) {
+      Storage::delete($path);
+      $this->secciones[$seccionKey]['contenido'][$contenidoKey]['img_fondo'] = null;
+    } else {
+      $this->secciones[$seccionKey]['contenido'][$contenidoKey]['img_fondo'] = null;
+    }
   }
 
   public function borrarImgCita($key)
@@ -137,63 +189,101 @@ class Crear extends Component
 
   public function guardar()
   {
-    $this->validate($this->rules, [
-      'required' => 'El campo es requerido'
-    ]);
+    // $this->validate($this->rules, [
+    //   'required' => 'El campo es requerido'
+    // ]);
     $this->curso->user_id = Auth::user()->id;
     $this->curso->cursos_categoria_id = 1;
     $this->curso->author_id = Auth::user()->id;
+    $this->curso->save();
+    if (empty($this->hasImgCurso)) {
+      $this->imgCurso->storeAs("cursos/{$this->curso->id}", "{$this->curso->slug}.{$this->imgCurso->getClientOriginalExtension()}");
 
-    $this->imgCurso->storeAs("cursos/{$this->curso->id}", "{$this->curso->slug}.{$this->imgCurso->getClientOriginalExtension()}");
-
-    $this->curso->imagen = "{$this->curso->slug}.{$this->imgCurso->getClientOriginalExtension()}";
+      $this->curso->imagen = "{$this->curso->slug}.{$this->imgCurso->getClientOriginalExtension()}";
+    }
 
     $this->curso->save();
 
 
-    foreach ($this->citas as $key => $value) {
-      $this->citas[$key]['profesion'] = strtoupper($this->citas[$key]['profesion']);
-      $this->citas[$key]['cursos_id'] = $this->curso->id;
-    }
-    if (count($this->citas)) {
-      Cita::insert(...$this->citas);
+    foreach ($this->citas as $value) {
+      Cita::updateOrCreate(
+        ['id' => $value['id']],
+        [
+          'autor' => $value['autor'],
+          'profesion' => $value['profesion'],
+          'imagen' => $value['imagen'],
+          'detalle' => $value['detalle'],
+          'cursos_id' => $this->curso->id
+        ]
+      );
     }
 
-    foreach ($this->secciones as $key => $seccione) {
-      $seccion = new Secciones;
-      $seccion->titulo = $seccione['titulo'];
-      $seccion->cursos_id = $this->curso->id;
-      $seccion->save();
+    foreach ($this->secciones as $key => $value) {
+      $seccion = Secciones::updateOrCreate(
+        ['id' => $value['id']],
+        [
+          'titulo' => $value['titulo'],
+          'cursos_id' => $this->curso->id
+        ]
+      );
+      foreach ($value['contenido'] as $key => $valuec) {
 
-      foreach ($seccione['contenido'] as $key => $contenido) {
         $name_file = null;
-        $file = $contenido['contenido_download'];
-        if ($contenido['contenido_download']) {
-          $name_slug = Str::slug($file->getClientOriginalName(),'_');
-          $name_file = $name_slug.'.'.$file->getClientOriginalExtension();
+        $file = $valuec['contenido_download'];
+        if ($valuec['contenido_download']) {
+          try {
+            $name_slug = Str::slug($file->getClientOriginalName(), '_');
+            $name_file = $name_slug . '.' . $file->getClientOriginalExtension();
+          } catch (\Throwable $th) {
+            $name_file = $valuec['contenido_download'];
+          }
         }
 
-        $contenido_obj = new Contenido;
-        $contenido_obj->titulo = $contenido['titulo'];
-        $contenido_obj->subtitulo = $contenido['subtitulo'];
-        $contenido_obj->detalle = $contenido['detalle'];
-        $contenido_obj->cursos_contenido_tipo_id = $contenido['cursos_contenido_tipo_id'];
-        $contenido_obj->cursos_seccione_id = $seccion->id;
+        $name_img_fondo = null;
+        $img_fondo = $valuec['img_fondo'];
+        if ($valuec['img_fondo']) {
+          try {
+            //code...
+            $name_img_fondo_slug = Str::slug($img_fondo->getClientOriginalName(), '_');
+            $name_img_fondo = $name_img_fondo_slug . '.' . $img_fondo->getClientOriginalExtension();
+          } catch (\Throwable $th) {
+            $name_img_fondo = $valuec['img_fondo'];
+          }
+        }
+        // dd($name_img_fondo);
 
-        $contenido_obj->slug = Str::slug($contenido['titulo'], '-');
-        $contenido_obj->save();
-
-        if ($contenido['contenido_download']) {
-          $file->storeAs("cursos/{$this->curso->id}/download/{$contenido_obj->id}", $name_file);
+        $contenido = Contenido::updateOrCreate(
+          ['id' => $valuec['id']],
+          [
+            'titulo' => $valuec['titulo'],
+            'subtitulo' => $valuec['subtitulo'],
+            'detalle' => $valuec['detalle'],
+            'recurso' => $valuec['recurso'],
+            'slug' => Str::slug($valuec['titulo'], "-"),
+            "cursos_contenido_tipo_id" => $valuec['cursos_contenido_tipo_id'],
+            'cursos_seccione_id' => $seccion->id,
+            'contenido_download' => $name_file,
+            'img_fondo' => $name_img_fondo
+          ]
+        );
+        if ($valuec['contenido_download']) {
+          try {
+            $file->storeAs("cursos/{$this->curso->id}/download/{$contenido->id}", $name_file);
+          } catch (\Throwable $th) {
+            $file = $valuec['contenido_download'];
+          }
+        }
+        if ($valuec['img_fondo']) {
+          try {
+            $img_fondo->storeAs("cursos/{$this->curso->id}/fondo/{$contenido->id}", $name_img_fondo);
+          } catch (\Throwable $th) {
+            $img_fondo = $valuec['img_fondo'];
+          }
         }
       }
     }
 
-    $this->reset([
-      'curso',
-      'secciones',
-    ]);
 
-    redirect()->route('curso.administrador');
+    redirect()->route('curso.editar', $this->curso->id);
   }
 }

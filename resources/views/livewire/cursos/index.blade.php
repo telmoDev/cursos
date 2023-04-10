@@ -3,7 +3,7 @@
         <div class="flex">
             <main class="  w-full ">
                 <div class="w-full">
-                  <div class="py-14" style="background-image: url('{{ route('img.cursos.bg') }}'); background-size: cover;">
+                  <div class="pb-14 pt-24" style="background-image: url('{{ route('img.cursos.bg') }}'); background-size: cover;">
                     <div class="flex mb-4 sm:rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="titulo w-8/12 pr-28">
                             <h1 class="color-[#3f3f3f] title text-2xl  font-bold">{{ $curso->nombre }}</h1>

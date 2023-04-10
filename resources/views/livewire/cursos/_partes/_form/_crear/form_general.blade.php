@@ -1,4 +1,7 @@
 <h3 class="text-lg">Información General</h3>
+@if ($hasEnlace)
+    <a class="text-[#5E2880] px-2" href="{{ $enlace }}">{{ $enlace }}</a>
+@endif
 <div class="box-entrada px-2 w-full mt-2">
     <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
         Nombre
@@ -68,10 +71,17 @@
     </label>
     <div class="relative {{ $imgCurso ? 'my-2' : '' }}" style="width: fit-content">
         @if ($imgCurso)
-            <span class="absolute right-2 top-2 cursor-pointer" wire:click="borrarImagen">
+            <span class="absolute right-2 top-2 cursor-pointer"
+                onclick="confirm('Esta seguro que desea eliminar esta imagen.') || event.stopImmediatePropagation()"
+                wire:click="borrarImagen">
                 @include('livewire.cursos._icons.cancel')
             </span>
-            <img src="{{ $imgCurso->temporaryUrl() }}" class="p-0" style="width: 250px;max-height: 250px;">
+            @if ($hasImgCurso)
+                <img src="{{ route('img.bg.curso', ['folder' => $curso->id, 'filename' => $imgCurso]) }}" class="p-0"
+                    style="width: 150px;max-height: 150px;">
+            @else
+                <img src="{{ $imgCurso->temporaryUrl() }}" class="p-0" style="width: 150px;max-height: 150px;">
+            @endif
         @endif
     </div>
     <input class="btn-file rounded-lg bg-indigo-500 " type="file" accept="image/*" wire:model.lazy="imgCurso">
@@ -106,16 +116,16 @@
                 @enderror --}}
     </div>
     <div class="box-entrada px-2 w-full mt-2 hover:order-1 hover:">
-      <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
-          Video(url)
-      </label>
-      <input type="text"
-          class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
-          placeholder="url..." wire:model.lazy="curso.bloque1_recurso">
-      {{-- @error("secciones.{$key}.contenido.{$keyc}.subtitulo")
+        <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
+            Video(url)
+        </label>
+        <input type="text"
+            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
+            placeholder="url..." wire:model.lazy="curso.bloque1_recurso">
+        {{-- @error("secciones.{$key}.contenido.{$keyc}.subtitulo")
                   <div class="text-red-600 text-sm">{{ $message }}</div>
               @enderror --}}
-  </div>
+    </div>
     <div class="box-entrada px-2 w-full mt-2">
         <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
             Detalle

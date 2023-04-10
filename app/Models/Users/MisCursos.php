@@ -12,6 +12,11 @@ class MisCursos extends Model
 
     protected $table = "user_mis_cursos";
 
+    protected $fillable = [
+      'curso_id',
+      'user_id'
+    ];
+
     public function curso()
     {
         return $this->hasOne(Curso::class,'id','curso_id');
