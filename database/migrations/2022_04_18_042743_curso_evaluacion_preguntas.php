@@ -16,8 +16,11 @@ class CursoEvaluacionPreguntas extends Migration
         Schema::create('curso_evaluacion_preguntas', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('curso_evaluacion_id');
-            $table->foreign('curso_evaluacion_id')->references('id')->on('curso_evaluacion')->onDelete('cascade');
+            $table->unsignedBigInteger('curso_id');
+            $table->foreign('curso_id')->references('id')->on('cursos')->onDelete('cascade');
+
+            $table->unsignedBigInteger('curso_seccion_id')->nullable();
+            $table->foreign('curso_seccion_id')->references('id')->on('cursos_seccione')->onDelete('cascade');
 
             $table->unsignedBigInteger('respuesta_correcta_id')->nullable();
             $table->foreign('respuesta_correcta_id')->references('id')->on('curso_evaluacion_pregunta_respuestas')->onDelete('cascade');

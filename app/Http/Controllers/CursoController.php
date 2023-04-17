@@ -59,5 +59,8 @@ class CursoController extends Controller
     {
         return view("cursos.administrador");
     }
-
+    public function preguntaCrearEditar(Request $request, $idCurso = null)
+    {
+        return view("cursos.pregunta-crear-editar", compact('idCurso'));
+    }
 }

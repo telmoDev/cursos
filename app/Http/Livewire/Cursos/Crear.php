@@ -197,9 +197,11 @@ class Crear extends Component
     $this->curso->author_id = Auth::user()->id;
     $this->curso->save();
     if (empty($this->hasImgCurso)) {
-      $this->imgCurso->storeAs("cursos/{$this->curso->id}", "{$this->curso->slug}.{$this->imgCurso->getClientOriginalExtension()}");
+      if ($this->imgCurso) {
+        $this->imgCurso->storeAs("cursos/{$this->curso->id}", "{$this->curso->slug}.{$this->imgCurso->getClientOriginalExtension()}");
 
-      $this->curso->imagen = "{$this->curso->slug}.{$this->imgCurso->getClientOriginalExtension()}";
+        $this->curso->imagen = "{$this->curso->slug}.{$this->imgCurso->getClientOriginalExtension()}";
+      }
     }
 
     $this->curso->save();

@@ -8,6 +8,7 @@ use App\Models\Cursos\Evaluacion;
 use App\Models\Cursos\PaginaBloqueCursoModel;
 use App\Models\Cursos\Secciones;
 use App\Traits\CreatedUpdatedBy;
+use CursoEvaluacionPreguntas;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -76,5 +77,4 @@ class Curso extends Model
     {
         return $this->hasMany(Cita::class,"cursos_id","id");
     }
-
 }

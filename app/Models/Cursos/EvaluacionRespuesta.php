@@ -11,5 +11,5 @@ class EvaluacionRespuesta extends Model
 
     protected $table = "curso_evaluacion_pregunta_respuestas";
 
-    protected $fillable = ["titulo"];
+    protected $fillable = ["titulo", 'pregunta_id', 'estado'];
 }

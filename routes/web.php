@@ -73,6 +73,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
   Route::get('/administrador/cursos', [CursoController::class, 'administrador'])->name('curso.administrador');
   Route::get('/administrador/evaluaciones', [CursoController::class, 'evaluacionAdmin'])->name('evaluacion.admin');
   Route::get('/administrador/evaluacion/{id?}', [CursoController::class, 'evaluacionCrearEditar'])->name('evaluacion.crear.editar');
+  Route::get('/administrador/preguntas/curso/{idCurso?}', [CursoController::class, 'preguntaCrearEditar'])->name('pregunta.crear.editar');
   Route::get('/administrador/categorias', [CategoriaController::class, 'index'])->name('evaluacion.categoria.admin');
   Route::get('/administrador/usuarios', [UserGeneralController::class, 'index'])->name('evaluacion.user.admin');
 

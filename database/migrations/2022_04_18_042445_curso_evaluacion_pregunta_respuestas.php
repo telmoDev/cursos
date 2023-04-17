@@ -17,7 +17,7 @@ class CursoEvaluacionPreguntaRespuestas extends Migration
             $table->id();
 
             $table->unsignedBigInteger('pregunta_id');
-            // $table->foreign('pregunta_id')->references('id')->on('curso_evaluacion_preguntas')->onDelete('cascade');
+            $table->foreign('pregunta_id')->references('id')->on('curso_evaluacion_preguntas')->onDelete('cascade');
 
             $table->string("titulo")->nullable();
             $table->boolean("estado")->default(true);

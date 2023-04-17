@@ -3,7 +3,7 @@
         <div class="shadow p-2 mt-3 mb-3 hover:border-2 rounded-lg hover:border-[#6b2b83]" x-data="{ open: false }">
             <label
                 class="flex justify-center items-center text-white rounded-lg text-sm font-bold  text-center py-3 bg-[#6b2b83]"
-                @click="open = !open">Contenido
+                @click="open = !open">Modulo
                 #{{ $loop->index + 1 }}<span x-show="open" class="ml-4">@include('livewire.cursos._icons.arrow_up')</span><span
                     x-show="!open" class="ml-4">@include('livewire.cursos._icons.arrow_down')</span></label>
             <div x-show="open" x-transition.duration.500ms>
@@ -49,58 +49,58 @@
                         @enderror
                     </div>
                 @endif
-                @if ( in_array($secciones[$key]['contenido'][$keyc]['cursos_contenido_tipo_id'], [2]) )
-                <div class="box-entrada px-2 w-full mt-2">
-                    <label for="countries" class="block text-gray-700 text-sm font-bold mt-2">Video(frame)</label>
+                @if (in_array($secciones[$key]['contenido'][$keyc]['cursos_contenido_tipo_id'], [2]))
+                    <div class="box-entrada px-2 w-full mt-2">
+                        <label for="countries" class="block text-gray-700 text-sm font-bold mt-2">Video(frame)</label>
 
-                    <textarea
-                        class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
-                        wire:model.lazy="secciones.{{ $key }}.contenido.{{ $keyc }}.recurso"></textarea>
-                    @error("secciones.{$key}.contenido.{$keyc}.recurso")
-                        <div class="text-red-600 text-sm">{{ $message }}</div>
-                    @enderror
-                </div>
+                        <textarea
+                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                            wire:model.lazy="secciones.{{ $key }}.contenido.{{ $keyc }}.recurso"></textarea>
+                        @error("secciones.{$key}.contenido.{$keyc}.recurso")
+                            <div class="text-red-600 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
                 @endif
 
-                @if ( in_array($secciones[$key]['contenido'][$keyc]['cursos_contenido_tipo_id'], [3,4]) )
-                <div class="box-entrada px-2 w-full mt-2">
-                    <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
-                        Descripción contenido
-                    </label>
-                    <textarea
-                        class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
-                        wire:model.lazy="secciones.{{ $key }}.contenido.{{ $keyc }}.detalle"></textarea>
-                    @error("secciones.{$key}.contenido.{$key}.detalle")
-                        <div class="text-red-600 text-sm">{{ $message }}</div>
-                    @enderror
-                </div>
+                @if (in_array($secciones[$key]['contenido'][$keyc]['cursos_contenido_tipo_id'], [3, 4]))
+                    <div class="box-entrada px-2 w-full mt-2">
+                        <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
+                            Descripción contenido
+                        </label>
+                        <textarea
+                            class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                            wire:model.lazy="secciones.{{ $key }}.contenido.{{ $keyc }}.detalle"></textarea>
+                        @error("secciones.{$key}.contenido.{$key}.detalle")
+                            <div class="text-red-600 text-sm">{{ $message }}</div>
+                        @enderror
+                    </div>
                 @endif
 
 
                 @if (in_array($secciones[$key]['contenido'][$keyc]['cursos_contenido_tipo_id'], [3, 4]))
                     <div class="box-entrada flex px-2 w-full mt-2">
-                      @if ( in_array($secciones[$key]['contenido'][$keyc]['cursos_contenido_tipo_id'], [3]) )
-                      <div class="box-entrada px-2 w-full mt-2">
-                          <div>
-                              <label class=" text-gray-700 text-sm font-bold mr-2">
-                                  Contenido para descargar
-                              </label>
-                          </div>
-                          <div class="" style="width: fit-content">
-                              @if ($secciones[$key]['contenido'][$keyc]['contenido_download'])
-                                  <div class="my-2 mx-auto relative" style="width: 75px">
-                                      <span class="absolute cursor-pointer" style="top: -3px; right: -3px;"
-                                          wire:click="borrarContenidoDownload({{ $key }}, {{ $keyc }})">
-                                          @include('livewire.cursos._icons.cancel')
-                                      </span>
-                                      @include('livewire.cursos._icons.file_download')
-                                  </div>
-                              @endif
-                              <input class="btn-contenido rounded-lg bg-indigo-500 " type="file"
-                                  wire:model.lazy="secciones.{{ $key }}.contenido.{{ $keyc }}.contenido_download">
-                          </div>
-                      </div>
-                      @endif
+                        @if (in_array($secciones[$key]['contenido'][$keyc]['cursos_contenido_tipo_id'], [3]))
+                            <div class="box-entrada px-2 w-full mt-2">
+                                <div>
+                                    <label class=" text-gray-700 text-sm font-bold mr-2">
+                                        Contenido para descargar
+                                    </label>
+                                </div>
+                                <div class="" style="width: fit-content">
+                                    @if ($secciones[$key]['contenido'][$keyc]['contenido_download'])
+                                        <div class="my-2 mx-auto relative" style="width: 75px">
+                                            <span class="absolute cursor-pointer" style="top: -3px; right: -3px;"
+                                                wire:click="borrarContenidoDownload({{ $key }}, {{ $keyc }})">
+                                                @include('livewire.cursos._icons.cancel')
+                                            </span>
+                                            @include('livewire.cursos._icons.file_download')
+                                        </div>
+                                    @endif
+                                    <input class="btn-contenido rounded-lg bg-indigo-500 " type="file"
+                                        wire:model.lazy="secciones.{{ $key }}.contenido.{{ $keyc }}.contenido_download">
+                                </div>
+                            </div>
+                        @endif
 
                         <div class="box-entrada px-2 w-full mt-2">
                             <div>

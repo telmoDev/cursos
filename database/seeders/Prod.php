@@ -20,5 +20,10 @@ class Prod extends Seeder
         ['titulo' => "Descarga"],
         ['titulo' => "Texto"],
       ]);
+
+      // TiposIdentificacion::insert([
+      //   [ 'nombre' => 'Cédula'],
+      //   [ 'nombre' => 'Pasaporte'],
+      // ]);
     }
 }
