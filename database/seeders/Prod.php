@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Cursos\ContenidoTipo;
+use App\Models\TipoIdentificacion;
 use Illuminate\Database\Seeder;
 
 class Prod extends Seeder
@@ -21,9 +22,9 @@ class Prod extends Seeder
         ['titulo' => "Texto"],
       ]);
 
-      // TiposIdentificacion::insert([
-      //   [ 'nombre' => 'Cédula'],
-      //   [ 'nombre' => 'Pasaporte'],
-      // ]);
+      TipoIdentificacion::insert([
+        [ 'nombre' => 'Cédula'],
+        [ 'nombre' => 'Pasaporte'],
+      ]);
     }
 }

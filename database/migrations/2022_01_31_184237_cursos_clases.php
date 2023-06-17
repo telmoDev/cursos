@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CursosSeccione extends Migration
+class CursosClases extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CursosSeccione extends Migration
      */
     public function up()
     {
-        Schema::create('cursos_seccione', function (Blueprint $table) {
+        Schema::create('cursos_clases', function (Blueprint $table) {
             $table->id();
             $table->string("titulo");
 
             $table->unsignedBigInteger('cursos_id');
             $table->foreign('cursos_id')->references('id')->on('cursos')->onDelete('cascade');
+
+            $table->unsignedBigInteger('cursos_modulo_id');
+            $table->foreign('cursos_modulo_id')->references('id')->on('cursos_modulos')->onDelete('cascade');
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

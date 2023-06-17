@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CursoEvaluacionPreguntaRespuestas extends Migration
+class CursoEvaluacionPreguntaRespuestasSecondTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class CursoEvaluacionPreguntaRespuestas extends Migration
             $table->id();
 
             $table->unsignedBigInteger('pregunta_id');
-            $table->foreign('pregunta_id')->references('id')->on('curso_evaluacion_preguntas')->onDelete('cascade');
+            // $table->foreign('pregunta_id')->references('id')->on('curso_evaluacion_preguntas')->onDelete('cascade');
 
             $table->string("titulo")->nullable();
             $table->boolean("estado")->default(true);

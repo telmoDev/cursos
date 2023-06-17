@@ -35,6 +35,12 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             $user->forceFill([
                 'name' => $input['name'],
                 'email' => $input['email'],
+                'nombres' => $input['nombres'],
+                'apellidos' => $input['apellidos'],
+                'direccion' => $input['direccion'],
+                'telefono' => $input['telefono'],
+                'identificacion' => $input['identificacion'],
+                'tipo_identificacion_id' => $input['tipo_identificacion_id'],
             ])->save();
         }
     }
@@ -52,6 +58,12 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'name' => $input['name'],
             'email' => $input['email'],
             'email_verified_at' => null,
+            'nombres' => $input['nombres'],
+            'apellidos' => $input['apellidos'],
+            'direccion' => $input['direccion'],
+            'telefono' => $input['telefono'],
+            'identificacion' => $input['identificacion'],
+            'tipo_identificacion_id' => $input['tipo_identificacion_id'],
         ])->save();
 
         $user->sendEmailVerificationNotification();

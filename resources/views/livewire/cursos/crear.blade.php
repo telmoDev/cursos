@@ -21,7 +21,8 @@
 
         </div>
         {{-- Syllabus --}}
-        @include('livewire.cursos._partes._form._crear.form_secciones')
+        {{-- @include('livewire.cursos._partes._form._crear.form_secciones') --}}
+        @include('livewire.cursos._partes._form._crear.form_modulos')
         {{-- end Syllabus --}}
 
 

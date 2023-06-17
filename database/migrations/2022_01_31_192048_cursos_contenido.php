@@ -13,7 +13,7 @@ class CursosContenido extends Migration
      */
     public function up()
     {
-        Schema::create('cursos_contenido', function (Blueprint $table) {
+        Schema::create('cursos_contenidos', function (Blueprint $table) {
             $table->id();
             $table->string("titulo");
             $table->string("subtitulo")->nullable();
@@ -27,8 +27,14 @@ class CursosContenido extends Migration
             $table->unsignedBigInteger('cursos_contenido_tipo_id');
             $table->foreign('cursos_contenido_tipo_id')->references('id')->on('cursos_contenido_tipo')->onDelete('cascade');
 
-            $table->unsignedBigInteger('cursos_seccione_id');
-            $table->foreign('cursos_seccione_id')->references('id')->on('cursos_seccione')->onDelete('cascade');
+            $table->unsignedBigInteger('cursos_id');
+            $table->foreign('cursos_id')->references('id')->on('cursos')->onDelete('cascade');
+
+            $table->unsignedBigInteger('cursos_modulo_id');
+            $table->foreign('cursos_modulo_id')->references('id')->on('cursos_modulos')->onDelete('cascade');
+
+            $table->unsignedBigInteger('cursos_clase_id');
+            $table->foreign('cursos_clase_id')->references('id')->on('cursos_clases')->onDelete('cascade');
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');

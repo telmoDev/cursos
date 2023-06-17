@@ -6,20 +6,22 @@ use App\Traits\CreatedUpdatedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Secciones extends Model
+class CursoModulo extends Model
 {
     use HasFactory;
     use CreatedUpdatedBy;
 
-    protected $table = "cursos_seccione";
+    protected $table = "cursos_modulos";
 
     protected $fillable = [
         "titulo",
-        'cursos_id'
+        'cursos_id',
+        'clases'
     ];
 
-    public function contenido()
+    public function clases()
     {
-        return $this->hasMany(Contenido::class,"cursos_seccione_id","id");
+        return $this->hasMany(CursosClase::class,"cursos_modulo_id","id");
     }
 }
+

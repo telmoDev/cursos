@@ -21,9 +21,9 @@
           @foreach ($evaluaciones as $item)
               <tr class="odd:bg-white even:bg-gray-100">
                   <td class="text-center">{{ ($loop->index + 1) }}</td>
-                  <td>{{ $item->titulo }}</td>
+                  <td>{{ $item->seccion->titulo }}</td>
                   <td class="text-center">{{ $item->curso->nombre }}</td>
-                  <td class="text-center">{{ $item->cantidad_preguntas }}</td>
+                  <td class="text-center">{{ $item->titulo }}</td>
                   <td>
                     <div class="flex justify-center items-center">
                       <div>

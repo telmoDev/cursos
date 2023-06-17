@@ -36,7 +36,7 @@
                                   <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </div>
-                            <div class="ml-4 cursor-pointer text-lg text-red-600" onclick="confirm('Esta seguro que desea eliminar este curso.') || event.stopImmediatePropagation()" wire:click="borrar({{ $item->id }})">
+                            <div class="ml-4 cursor-pointer text-lg text-red-600" onclick="confirm('Esta seguro que desea eliminar este curso.') || event.stopImmediatePropagation()" wire:click.defer="borrar({{ $item->id }})">
                               <i class="fa-solid fa-trash" ></i>
                             </div>
                         </div>

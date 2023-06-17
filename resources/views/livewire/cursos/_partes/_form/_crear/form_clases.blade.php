@@ -1,24 +1,27 @@
 <x-contenedor>
-    @forelse( $modulos[$moduloKey]['clases'][$claseKey]['secciones'] as $key => $seccion )
-        <x-acordeon tipo="Sección" numero="{{ $loop->index + 1 }}">
+    @forelse( $modulos[$moduloKey]->clases as $key => $clase )
+        <x-acordeon tipo="Clase" numero="{{ $loop->index + 1 }}">
           <div class="seccion">
               <div class="box-entrada px-2 w-full mt-2">
                   <label class="block text-gray-700 text-sm font-bold mt-2" for="fecha_inicio">
-                  Título de la sección
+                  Título de la clase
                   </label>
                   <input
                       type="text"
                       class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block rounded-none rounded-r-md sm:text-sm border-gray-300"
                       placeholder="Título de sección"
-                      wire:model.lazy="secciones.{{$key}}.titulo"
+                      wire:model.lazy="clases.{{$key}}.titulo"
                   >
-                  @error("secciones.{$key}.titulo")
+                  @error("clases.{$key}.titulo")
                       <div class="text-red-600 text-sm">{{ $message }}</div>
                   @enderror
               </div>
           </div>
 
-
+          @include('livewire.cursos._partes._form._crear.form_contenidos', [
+            'moduloKey' => $moduloKey,
+            'claseKey' => $loop->index
+          ])
           <div class="flex">
               <div class="rounded-lg bg-red-600 p-2" title="Eliminar Sección" wire:click="borrarSeccion({{ $key }})">
                   @include('livewire.cursos._icons.bin')
@@ -35,8 +38,8 @@
     @endforelse
 
     <div class="flex justify-end">
-        <x-jet-button wire:click="agregarSeccion({{$moduloKey}},{{$claseKey}})" type="button" wire:loading.attr="disabled">
-            + Sección
+        <x-jet-button wire:click.lazy="agregarClase( {{$moduloKey}} )" type="button" wire:loading.attr="disabled">
+            + Clase
         </x-jet-button>
     </div>
 </x-contenedor>
