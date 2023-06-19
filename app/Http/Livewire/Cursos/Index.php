@@ -16,19 +16,22 @@ class Index extends Component
     public $secciones_inscrito = [];
     public $citas;
     public $bloques;
+    public $mis_cursos = [];
+    public $caracteristica_cursos = [];
 
     public function mount()
     {
-        // 2 dd( $this->curso->id );
-        if( Auth::check() ){
+        //dd($this->caracteristica_cursos);
+        //dd( $this->curso->id );
+        /* if( Auth::check() ){
             $id_user = Auth::user()->id;
-            $this->mis_cursos = UsersMisCursos::where('user_id', $id_user)->where('curso_id', $this->curso->id)->get();
-            $this->inscrito = ( $this->mis_cursos->count() > 0 )? true: false;
+            //$this->mis_cursos = UsersMisCursos::where('user_id', $id_user)->where('curso_id', $this->curso->id)->get();
+            //$this->inscrito = ( $this->mis_cursos->count() > 0 )? true: false;
             if( $this->inscrito ){
                 // $this->secciones_inscrito = ;
             }
-        }
-        $this->citas = Cita::where('cursos_id', $this->curso->id)->get();
+        } */
+        //$this->citas = Cita::where('cursos_id', $this->curso->id)->get();
         // $this->bloques = PaginaBloqueCursoModel::where('cursos_id', $this->curso->id)->get();
     }
 
