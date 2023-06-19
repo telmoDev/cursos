@@ -19,8 +19,6 @@ class Contenido extends Model
     "detalle",
     "recurso",
     'slug',
-    'cursos_id',
-    'cursos_modulo_id',
     'cursos_clase_id',
     'cursos_contenido_tipo_id',
     'contenido_download',
