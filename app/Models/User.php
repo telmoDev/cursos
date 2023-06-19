@@ -38,7 +38,8 @@ class User extends Authenticatable implements MustVerifyEmail
     'identificacion',
     'telefono',
     'tipo_identificacion_id',
-    'maestro'
+    'maestro',
+    'descripcion'
   ];
 
   /**
