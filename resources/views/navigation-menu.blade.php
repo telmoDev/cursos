@@ -16,18 +16,7 @@
                         <x-jet-nav-link href="{{ route('curso.list') }}" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] flex size-18 font-acephimere {{ request()->routeIs('curso.list') ? 'text-[#5E2880] border-[#DB3634]' : '' }}" :active="request()->routeIs('curso.list')">
                             {{ __('Cursos') }}
                         </x-jet-nav-link>
-                        <x-jet-nav-link href="#" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] size-18 font-acephimere" >
-                            {{ __('Recursos') }}
-                        </x-jet-nav-link>
-                        <x-jet-nav-link href="#" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] size-18 font-acephimere" >
-                            {{ __('Diplomados') }}
-                        </x-jet-nav-link>
-                        <x-jet-nav-link href="#" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] size-18 font-acephimere" >
-                            {{ __('Membresías') }}
-                        </x-jet-nav-link>
-                        <x-jet-nav-link href="{{ route('eventos.index') }}" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] font-acephimere size-18 {{ request()->routeIs('eventos.index') ? 'text-[#5E2880] border-[#DB3634]' : '' }}" :active="request()->routeIs('eventos.index')">
-                            {{ __('Eventos') }}
-                        </x-jet-nav-link>
+
                         @auth
                             <x-jet-nav-link href="{{ route('dashboard') }}" class="text-[#6b6c6f] hover:text-[#5E2880] hover:border-[#DB3634] size-18 font-bold {{ request()->routeIs('dashboard') ? 'text-[#5E2880] border-[#DB3634]' : '' }}" :active="request()->routeIs('dashboard')">
                                 {{ __('Mis Cursos ') }}

@@ -15,12 +15,11 @@ class CursosClase extends Model
 
     protected $fillable = [
         "titulo",
-        'cursos_id',
         'cursos_modulo_id'
     ];
 
-    // public function contenido()
-    // {
-    //     return $this->hasMany(Contenido::class,"cursos_seccione_id","id");
-    // }
+    public function contenidos()
+    {
+        return $this->hasMany(Contenido::class,"cursos_clase_id","id");
+    }
 }

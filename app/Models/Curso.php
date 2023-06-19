@@ -2,17 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Cursos\Cita;
-use App\Models\Cursos\Contenido;
+use App\Models\Cursos\CursoModulo;
 use App\Models\Cursos\Evaluacion;
-use App\Models\Cursos\PaginaBloqueCursoModel;
-use App\Models\Cursos\Secciones;
+
 use App\Traits\CreatedUpdatedBy;
 // use CursoEvaluacionPreguntas;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Storage;
+
 
 class Curso extends Model
 {
@@ -20,23 +17,20 @@ class Curso extends Model
     use CreatedUpdatedBy;
 
     protected $fillable = [
-        'imagen',
-        'nombre',
-        'descripcion_larga',
-        'descripcion_corta',
-        'descripcion_referencia',
-        'precio',
-        'user_id',
-        'cursos_categoria_id',
-        'bloque1_titulo',
-        'bloque1_subtitulo',
-        'bloque1_detalle',
-        'bloque1_recurso',
-        'bloque1_activo',
-        'bloque2_titulo',
-        'bloque2_subtitulo',
-        'bloque2_detalle',
-        'bloque2_activo'
+      'id',
+      'imagen',
+      'nombre',
+      'slug',
+      'descripcion_larga',
+      'descripcion_corta',
+      'hora',
+      'precio',
+      'link_video',
+      'seccion_titulo',
+      'seccion_subtitulo',
+      'seccion_link_video',
+      'seccion_detalle',
+      'cursos_categoria_id'
     ];
 
 
@@ -63,9 +57,9 @@ class Curso extends Model
         return env("APP_URL") . "/" . env("URL_CURSOS") . "/" . $this->slug;
     }
 
-    public function secciones()
+    public function modulos()
     {
-        return $this->hasMany(Secciones::class,"cursos_id","id");
+        return $this->hasMany(CursoModulo::class,"cursos_id","id");
     }
 
     public function evaluacion()
@@ -73,8 +67,10 @@ class Curso extends Model
         return $this->hasOne(Evaluacion::class,"cursos_id","id");
     }
 
-    public function citas()
-    {
-        return $this->hasMany(Cita::class,"cursos_id","id");
+
+    function caracteristicas() {
+      return $this->hasMany(CaracteristicaCurso::class, "curso_id", "id");
     }
+
+
 }

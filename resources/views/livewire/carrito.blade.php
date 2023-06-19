@@ -45,15 +45,11 @@
         <table class="w-1/3" >
             <tr>
                 <th class="text-left">Subtotal: </th>
-                <td class="text-right px-3">$. {{ number_format( $subtotal , 2 ) }}</td>
-            </tr>
-            <tr>
-                <th class="text-left">IVA: </th>
-                <td class="text-right px-3">$. {{ number_format( round( $subtotal * 0.14 , 2) ,  2) }}</td>
+                <td class="text-right px-3">$ {{ number_format( $subtotal , 2 ) }}</td>
             </tr>
             <tr>
                 <th class="text-left">TOTAL: </th>
-                <td class="text-right px-3">$. {{ number_format( $subtotal + round( $subtotal * 0.14 , 2) , 2) }}</td>
+                <td class="text-right px-3">$ {{ number_format( $subtotal + round( $subtotal * 0.14 , 2) , 2) }}</td>
             </tr>
 
         </table>

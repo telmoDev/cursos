@@ -16,7 +16,7 @@
             </div>
             <div class="relative z-10 px-4 text-white italic text-right pl-12 transition-all" x-transition.duration.250ms x-show="open">{{ $curso->descripcion_corta }}</div>
             <div class="text-[#80009d] font-bold px-4 pt-5 text-right">
-                <div class="text-sm">En línea / 120h</div>
+                <div class="text-sm">En línea / {{$curso->hora}}h</div>
                 <div class="text-3xl -mt-1 tracking-tight font-bold">{{ $curso->precio }} USD</div>
             </div>
         </div>

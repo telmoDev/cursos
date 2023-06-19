@@ -17,9 +17,6 @@ class CursosClases extends Migration
             $table->id();
             $table->string("titulo");
 
-            $table->unsignedBigInteger('cursos_id');
-            $table->foreign('cursos_id')->references('id')->on('cursos')->onDelete('cascade');
-
             $table->unsignedBigInteger('cursos_modulo_id');
             $table->foreign('cursos_modulo_id')->references('id')->on('cursos_modulos')->onDelete('cascade');
 

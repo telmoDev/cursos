@@ -1,6 +1,4 @@
-@extends('livewire.administrador-component')
-@section('content')
-
+<x-admin>
 <div>
   <div class="mb-3">
       <a href="{{route( 'evaluacion.crear.editar')}}" class="text-md rounded-lg  bg-[#6b2b83] text-white py-2 px-4" >
@@ -44,5 +42,4 @@
 
 </div>
 
-@endsection
-
+</x-admin>

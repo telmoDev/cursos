@@ -1,5 +1,4 @@
-@extends('livewire.administrador-component')
-@section('content')
+<x-admin>
 
     <div>
     <div class="mb-3">
@@ -50,4 +49,4 @@
 </div>
 
 
-@endsection
+</x-admin>

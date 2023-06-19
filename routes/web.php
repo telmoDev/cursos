@@ -68,8 +68,6 @@ Route::get('img-bg/cursos/bg/', function () {
 })->name('img.cursos.bg');
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-
-  Route::get('/administrador', [AdministradorComponent::class, 'render'])->name('administrador');
   Route::get('/administrador/cursos', [CursoController::class, 'administrador'])->name('curso.administrador');
   Route::get('/administrador/evaluaciones', [CursoController::class, 'evaluacionAdmin'])->name('evaluacion.admin');
   Route::get('/administrador/evaluacion/{id?}', [CursoController::class, 'evaluacionCrearEditar'])->name('evaluacion.crear.editar');

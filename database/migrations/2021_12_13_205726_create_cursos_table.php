@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use function Ramsey\Uuid\v1;
 
 class CreateCursosTable extends Migration
 {
@@ -22,31 +21,17 @@ class CreateCursosTable extends Migration
             $table->string("slug");
             $table->text("descripcion_larga");
             $table->string("descripcion_corta");
+            $table->string("hora");
             $table->double("precio");
-            $table->integer("num_inscritos")->default(0);
-            $table->text("descripcion_referencia")->nullable();
+            $table->string("link_video");
 
-            // bloque 1
-            $table->string("bloque1_titulo")->nullable();
-            $table->string("bloque1_subtitulo")->nullable();
-            $table->text("bloque1_detalle")->nullable();
-            $table->string("bloque1_recurso")->nullable();
-            $table->boolean("bloque1_activo")->default(false);
+            $table->string("seccion_titulo");
+            $table->string("seccion_subtitulo");
+            $table->string("seccion_link_video");
+            $table->string("seccion_detalle");
 
-            // bloque 2
-            $table->string("bloque2_titulo")->nullable();
-            $table->string("bloque2_subtitulo")->nullable();
-            $table->text("bloque2_detalle")->nullable();
-            $table->boolean("bloque2_activo")->default(false);
-
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-
-            $table->unsignedBigInteger('cursos_categoria_id');
+            $table->unsignedBigInteger('cursos_categoria_id')->nullable();
             $table->foreign('cursos_categoria_id')->references('id')->on('cursos_categorias')->onDelete('cascade');
-
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
