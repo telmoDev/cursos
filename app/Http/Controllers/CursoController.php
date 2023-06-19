@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Curso;
 use App\Http\Requests\StoreCursoRequest;
 use App\Http\Requests\UpdateCursoRequest;
+use Illuminate\Http\Request;
 
 class CursoController extends Controller
 {
@@ -13,74 +14,53 @@ class CursoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $slug)
     {
-        //
+        $curso = Curso::where("slug", $slug)->firstOrFail();
+        return view("cursos.index", compact('curso'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function alumno(Request $request, $curso, $seccion)
     {
-        //
+        return view("cursos.alumno", compact('curso', 'seccion'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreCursoRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreCursoRequest $request)
+    public function evaluacion(Request $request, $curso)
     {
-        //
+        return view("cursos.evaluacion", compact('curso'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Curso $curso)
+    public function evaluacionAdmin(Request $request)
     {
-        //
+        return view("cursos.evaluacion-admin");
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Curso $curso)
+    public function evaluacionCrearEditar(Request $request, $id = null)
     {
-        //
+        return view("cursos.evaluacion-crear-editar", compact('id'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateCursoRequest  $request
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateCursoRequest $request, Curso $curso)
+    public function list()
     {
-        //
+        return view("cursos.list");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Curso  $curso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Curso $curso)
+    // public function crear()
+    // {
+    //     return view("cursos.crear");
+    // }
+
+    public function crear(Request $request, $id = null)
     {
-        //
+        return view("cursos.crear", compact('id'));
+    }
+
+    public function administrador()
+    {
+        return view("cursos.administrador");
+    }
+    public function preguntaCrearEditar(Request $request, $idCurso = null)
+    {
+        return view("cursos.pregunta-crear-editar", compact('idCurso'));
     }
 }

@@ -12,31 +12,20 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('css/fonts-icons.css') }}">
+
+
+        @livewireStyles
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body>
-        <header class="relative">
-            <div class="px-4 sm:px-6 md:px-8">
-                <div class="relative pt-6 lg:pt-8 flex items-center justify-between text-gray-700 font-semibold text-sm leading-6">
-                    <div class="logo">Cursos UTE</div>
-                    <div class="flex items-center">
-                        <nav class="hidden  md:block">
-                            <ul class="flex items-center space-x-8">
-                                <li><a class="hover:text-sky-500" href="/">Home</a></li>
-                                <li><a class="hover:text-sky-500" href="{{ route('eventos.index') }}">Eventos</a></li>
-                                <li><a class="hover:text-sky-500" href="/">Cursos</a></li>
-                                <li><a class="hover:text-sky-500" href="/">FAQ</a></li>
-                                <li><a class="hover:text-sky-500" href="/">Contacto</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </header>
-        <div class="font-sans text-gray-900 antialiased">
+        @livewire('navigation-menu')
+        <div class="font-sans text-gray-900 antialiased pt-32">
             {{ $slot }}
         </div>
+        @include('layouts._partes.footer')
+        @livewireScripts
     </body>
 </html>

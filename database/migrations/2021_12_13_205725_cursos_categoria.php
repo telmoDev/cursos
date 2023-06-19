@@ -16,6 +16,7 @@ class CursosCategoria extends Migration
         Schema::create('cursos_categorias', function (Blueprint $table) {
             $table->id();
             $table->string("nombre");
+            $table->string("slug");
             $table->string("imagen")->nullable();
 
             $table->unsignedBigInteger('created_by')->nullable();

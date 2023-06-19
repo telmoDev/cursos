@@ -1,0 +1,2 @@
+<livewire:cursos.evaluacion-admin/>
+

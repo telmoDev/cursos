@@ -1,0 +1,4 @@
+
+  <livewire:cursos.administrador />
+
+
