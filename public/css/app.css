@@ -2152,6 +2152,9 @@ select {
 .text-right {
 	text-align: right;
 }
+.text-justify {
+	text-align: justify;
+}
 .font-sans {
 	font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -2639,7 +2642,7 @@ button.swiper-pagination-bullet{border:none;margin:0;padding:0;box-shadow:none;-
         url(../fonts/Acephimere_Bold_1.woff2?98713a66992f97f86e8de2727e04ffde) format('woff2'),
         url(../fonts/Acephimere_Bold_1.woff?b457b1ac87bc685941aaef56bb8f85c4) format('woff'),
         url(../fonts/Acephimere_Bold_1.ttf?1c21dcc963d4bf4d59d59da66a66693a) format('truetype'),
-        url(../fonts/Acephimere_Bold_1.svg?ae7934a96b107510db14d81ff4f2a5ce#Acephimere_Bold_1) format('svg');
+        url(../fonts/Acephimere_Bold_1.svg?f0b27b5c1953cbfbd4c9f7dfa704438a#Acephimere_Bold_1) format('svg');
 }
 .slider-principal {
     width: 1100px;

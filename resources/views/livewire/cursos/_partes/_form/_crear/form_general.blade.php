@@ -128,19 +128,17 @@
 
                                 <div class="box-entrada px-2 w-full mt-2">
                                   <label class="block text-gray-700 text-sm font-bold mt-2">
-                                      {{ $label }}
+                                      Tipo de contenido
                                   </label>
                                   <div class="relative">
-                                    {{ $slot }}
                                     <select class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block box-entrada px-2 mt-2  rounded-md sm:text-sm border-gray-300" wire:model="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.cursos_contenido_tipo_id">
+                                      <option >Seleccione un tipo...</option>
                                       @foreach ($tipos as $item)
                                           <option value="{{ $item->id }}">{{ $item->titulo }}</option>
                                       @endforeach
                                     </select>
                                   </div>
-                                  @error($error)
-                                      <div class="text-red-600 text-sm">{{ $message }}</div>
-                                  @enderror
+
                               </div>
 
 

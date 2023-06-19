@@ -13,11 +13,23 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
         <link rel="stylesheet" href="{{ mix('css/fonts-icons.css') }}">
+        <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+/>
 
+
+<script src="
+https://cdn.jsdelivr.net/npm/swiper@9.1.1/swiper-bundle.min.js
+"></script>
+<link href="
+https://cdn.jsdelivr.net/npm/swiper@9.1.1/modules/scrollbar/scrollbar.min.css
+" rel="stylesheet">
 
         @livewireStyles
 
         <!-- Scripts -->
+
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body>
@@ -28,4 +40,10 @@
         @include('layouts._partes.footer')
         @livewireScripts
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script type="module">
+      import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js'
+
+      const swiper = new Swiper('.carousel-principal-items')
+    </script>
 </html>
