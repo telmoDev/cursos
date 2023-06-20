@@ -18,11 +18,41 @@ class Index extends Component
     public $bloques;
     public $mis_cursos = [];
     public $caracteristica_cursos = [];
+    public $tarjetas = [];
+    public $videos;
 
     public function mount()
     {
         //dd($this->caracteristica_cursos);
         //dd( $this->curso->id );
+        $this->caracteristica_cursos = $this->curso->caracteristicas()->get();
+        $this->tarjetas = [
+            [
+                'titulo' => 'POO',
+                'subtitulo' => '¿Qué es la POO?',
+                'contenido' => 'La POO es............................',
+            ],
+            [
+                'titulo' => 'Herencia',
+                'subtitulo' => '¿Qué es la herencia?',
+                'contenido' => 'Herencia en POO es .................................',
+            ],
+            // Agrega más tarjetas aquí si es necesario
+        ];
+        $this->videos = [
+            [
+                'nombre' => 'Javier Vidaurreta',
+                'titulo' => 'People Country Lead de WPP España',
+                'descripcion' => '“Yo encuentro valor en ThePowerMBA, hablando como alguien de Recursos Humanos, porque aquellos que pasen por el programa, van a aportar un conocimiento actualizado de la realidad económica, han demostrado la inquietud o el apetito por seguir formándose.“',
+            ],
+            [
+                'nombre' => 'Elvira Herreros',
+                'titulo' => 'Directora de Ingeniería en Novabase',
+                'descripcion' => '“Te ayuda a tener el conocimiento global y a poder trasladarlo en tu día a día, tiene mucha aplicación. Sin duda los casos prácticos y los ejemplos de otras empresas, motivan y ayudan mucho al resto de profesionales. Es una de las principales diferencias con otros másteres.”',
+            ],
+            // Agrega más tarjetas aquí si es necesario
+        ];
+        //dd($caracteristica_cursos);
         /* if( Auth::check() ){
             $id_user = Auth::user()->id;
             //$this->mis_cursos = UsersMisCursos::where('user_id', $id_user)->where('curso_id', $this->curso->id)->get();
