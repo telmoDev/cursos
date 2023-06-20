@@ -1,7 +1,8 @@
 <div class="btn text-lg mt-2 flex justify-end px-4">
-    <x-jet-button class="add w-full text-center block" style="display: block" wire:click="add" >
+    <x-jet-button class="add w-full text-center block rounded-full" style="display: block" wire:click="add">
         {{ __('Agregar al carrito') }}
     </x-jet-button>
+
     @auth
     <x-jet-dialog-modal wire:model="agregar_carrito">
         <x-slot name="title">
