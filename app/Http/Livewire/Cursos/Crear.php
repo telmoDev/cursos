@@ -58,7 +58,7 @@ class Crear extends Component
     $this->maestros = User::where('maestro', true)->get();
     $this->tipos = ContenidoTipo::all();
 
-    // dd($this->caracteristicas);
+    // dd($this->modulos);
   }
 
   public function updated($name, $value)
@@ -85,8 +85,8 @@ class Crear extends Component
     foreach ($modulos as $key => $value) {
       $this->modulos[$key] = $value;
       $this->modulos[$key]['clases'] = $value->clases()->get();
-      foreach ($this->modulos[$key]['clases'] as $key => $value) {
-        # code...
+      foreach ($this->modulos[$key]['clases'] as $keyClase => $valueClase) {
+        $this->modulos[$key]['clases'][$keyClase][] = $valueClase->contenidos()->get();
       }
     }
   }
@@ -145,7 +145,7 @@ class Crear extends Component
   {
     // dd('Prueba')
     $this->modulos[$keyModulo]['clases'][$keyClases]['contenidos'][] = [
-      'id' => '',
+      'id' => null,
       'titulo' => '',
       'subtitulo' => '',
       'detalle' => '',
@@ -165,6 +165,7 @@ class Crear extends Component
 
   function guardar()
   {
+    // dd($this->modulos);
     $this->validate($this->rules, [
       'required' => 'El campo es requerido'
     ]);
@@ -209,7 +210,7 @@ class Crear extends Component
               'titulo' => $valueContent['titulo'],
               'subtitulo' => $valueContent['subtitulo'],
               'detalle' => $valueContent['detalle'],
-              'recurso' => '',
+              'recurso' => $valueContent['recurso'],
               'slug' => '',
               'cursos_clase_id' => $clase->id,
               'cursos_contenido_tipo_id' => $valueContent['cursos_contenido_tipo_id'],

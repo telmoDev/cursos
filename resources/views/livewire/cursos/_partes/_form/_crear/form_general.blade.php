@@ -118,7 +118,7 @@
 
                     <h3 class="text-lg">Contenido</h3>
                     @forelse ($clase['contenidos'] as $keyContenido => $contenido)
-                        <x-acordeon tipo="Contenido" :numero="$keyClase + 1">
+                        <x-acordeon tipo="Contenido" :numero="$keyContenido + 1">
 
                             <x-input
                                 wire:model.lazy="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.titulo"
@@ -151,6 +151,11 @@
                                 wire:model.lazy="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.detalle"
                                 error="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.detalle"
                                 label="Detalle" />
+
+                                <x-input
+                                wire:model.lazy="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.recurso"
+                                error="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.recurso" placeholder="url..."
+                                label="Video" />
 
 
                         </x-acordeon>
