@@ -4,7 +4,12 @@ namespace App\Http\Livewire\Cursos;
 
 use App\Models\CaracteristicaCurso;
 use App\Models\Curso;
+use App\Models\Cursos\Contenido;
+use App\Models\Cursos\ContenidoTipo;
+use App\Models\Cursos\CursoModulo;
+use App\Models\Cursos\CursosClase;
 use App\Models\User;
+use CursosContenido;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -23,6 +28,8 @@ class Crear extends Component
   public $clases = [];
   public $contenidos = [];
   public $maestros;
+
+  public $tipos=[];
 
   protected $rules = [
     'curso.imagen' => '',
@@ -47,28 +54,45 @@ class Crear extends Component
     $this->enlaceCurso = $this->curso->slug;
     $this->imagenCurso = $this->curso->imagen;
     $this->caracteristicas = $this->curso->caracteristicas()->get()->toArray();
-    $this->modulos = $this->curso->modulos()->get()->toArray();
+    $this->obtenerSyllaby();
     $this->maestros = User::where('maestro', true)->get();
+    $this->tipos = ContenidoTipo::all();
 
-    // dd($this->caracteristicas);
+    // dd($this->modulos);
   }
 
-  public function updated($name, $value) {
+  public function updated($name, $value)
+  {
     if ($name == 'curso.nombre') {
       $this->curso->slug = Str::slug($value);
     }
   }
 
-  function obtenerNombreImagen() {
+  function obtenerNombreImagen()
+  {
     $nombre = $this->imagenCurso->getClientOriginalName();
-    [$nombre, $extension ] = explode('.', $nombre);
+    [$nombre, $extension] = explode('.', $nombre);
     $nombre = Str::slug($nombre);
     $nombre = "$nombre.$extension";
     $this->nuevaImagen = true;
     return $nombre;
   }
 
-  function agregarCaracteristica() {
+  function obtenerSyllaby()
+  {
+    $modulos = $this->curso->modulos()->get();
+
+    foreach ($modulos as $key => $value) {
+      $this->modulos[$key] = $value;
+      $this->modulos[$key]['clases'] = $value->clases()->get();
+      foreach ($this->modulos[$key]['clases'] as $keyClase => $valueClase) {
+        $this->modulos[$key]['clases'][$keyClase][] = $valueClase->contenidos()->get();
+      }
+    }
+  }
+
+  function agregarCaracteristica()
+  {
     array_push($this->caracteristicas, [
       'id' => null,
       'detalle' => '',
@@ -76,7 +100,8 @@ class Crear extends Component
     ]);
   }
 
-  function borrarCaracteristica($key, $id=null) {
+  function borrarCaracteristica($key, $id = null)
+  {
     // dd($id);
     if (!empty($id)) {
       $caracteristica = CaracteristicaCurso::find($id);
@@ -85,10 +110,52 @@ class Crear extends Component
     unset($this->caracteristicas[$key]);
   }
 
-  function agregarModulo() {
+  function agregarModulo()
+  {
     array_push($this->modulos, [
-      'titulo' => ''
+      'id' => null,
+      'titulo' => '',
+      'cursos_id' => null,
+      'clases' => []
     ]);
+  }
+
+  function borrarModulo()
+  {
+    array_push($this->modulos, [
+      'id' => null,
+      'titulo' => '',
+      'cursos_id' => null,
+      'clases' => []
+    ]);
+  }
+
+  function agregarClase($key)
+  {
+    // dd('Prueba');
+    $this->modulos[$key]['clases'][] = [
+      'id' => null,
+      'titulo' => '',
+      'cursos_modulo_id' => null,
+      'contenidos' => []
+    ];
+  }
+
+  function agregarContenido($keyModulo, $keyClases)
+  {
+    // dd('Prueba')
+    $this->modulos[$keyModulo]['clases'][$keyClases]['contenidos'][] = [
+      'id' => null,
+      'titulo' => '',
+      'subtitulo' => '',
+      'detalle' => '',
+      'recurso' => '',
+      'slug' => '',
+      'cursos_clase_id' => '',
+      'cursos_contenido_tipo_id' => '',
+      'contenido_download' => '',
+      'img_fondo' => ''
+    ];
   }
 
   public function render()
@@ -96,8 +163,10 @@ class Crear extends Component
     return view('livewire.cursos.crear');
   }
 
-  function guardar() {
-    $this->validate($this->rules,[
+  function guardar()
+  {
+    // dd($this->modulos);
+    $this->validate($this->rules, [
       'required' => 'El campo es requerido'
     ]);
 
@@ -105,19 +174,55 @@ class Crear extends Component
 
     $this->curso->save();
 
-    if($this->nuevaImagen)
+    if ($this->nuevaImagen)
       $this->imagenCurso->storeAs("cursos/{$this->curso->id}", "{$this->curso->imagen}");
     foreach ($this->caracteristicas as $key => $value) {
-      CaracteristicaCurso:: updateOrCreate(
+      CaracteristicaCurso::updateOrCreate(
         ['id' => $value['id']],
         [
           'detalle' => $value['detalle'],
           'curso_id' => $this->curso->id
         ]
-        );
+      );
     }
 
-    redirect()->route('curso.editar', $this->curso->id);
-  }
+    foreach ($this->modulos as $key => $value) {
+      $modulo =  CursoModulo::updateOrCreate(
+        ['id' => $value['id']],
+        [
+          'titulo' => $value['titulo'],
+          'cursos_id' => $this->curso->id
+        ]
+      );
+      foreach ($value['clases'] as $key => $valueClase) {
+        $clase = CursosClase::updateOrCreate(
+          ['id' => $value['id']],
+          [
+            'titulo' => $valueClase['titulo'],
+            'cursos_modulo_id' => $modulo->id
+          ]
+        );
+        foreach ($valueClase['contenidos'] as $key => $valueContent) {
+          // dd($valueContent['cursos_contenido_tipo_id']);
+          $clase = Contenido::updateOrCreate(
+            ['id' => $value['id']],
+            [
+              'titulo' => $valueContent['titulo'],
+              'subtitulo' => $valueContent['subtitulo'],
+              'detalle' => $valueContent['detalle'],
+              'recurso' => $valueContent['recurso'],
+              'slug' => '',
+              'cursos_clase_id' => $clase->id,
+              'cursos_contenido_tipo_id' => $valueContent['cursos_contenido_tipo_id'],
+              'contenido_download' => '',
+              'img_fondo' => ''
+            ]
+          );
+        }
+      }
+    }
 
+    // redirect()->route('curso.editar', $this->curso->id);
+    redirect()->route('curso.administrador');
+  }
 }

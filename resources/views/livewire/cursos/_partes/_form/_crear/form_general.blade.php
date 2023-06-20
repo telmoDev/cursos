@@ -102,11 +102,80 @@
 <hr class="my-5">
 <div class="hover:border-2 hover:border-[#6b2b83] p-2 border">
     <h3 class="text-lg">Syllabus</h3>
-    <h3 class="text-lg">Modulo</h3>
-    @forelse ($modulos as $key => $item)
+
+    <h3 class="text-lg">Modulos</h3>
+    @forelse ($modulos as $key => $modulo)
         <x-acordeon tipo="Modulo" :numero="$key + 1">
-            <x-input wire:model.lazy="modulos.{{$key}}.titulo" error="modulos.{{$key}}.titulo" placeholder="Titulo..."
-                label="Titulo" />
+            <x-input wire:model.lazy="modulos.{{ $key }}.titulo" error="modulos.{{ $key }}.titulo"
+                placeholder="Titulo..." label="Titulo" />
+
+            <h3 class="text-lg">Clases</h3>
+            @forelse ($modulo['clases'] as $keyClase => $clase)
+                <x-acordeon tipo="Clase" :numero="$keyClase + 1">
+                    <x-input wire:model.lazy="modulos.{{ $key }}.clases.{{ $keyClase }}.titulo"
+                        error="modulos.{{ $key }}.clases.{{ $keyClase }}.titulo"
+                        placeholder="Titulo..." label="Titulo" />
+
+                    <h3 class="text-lg">Contenido</h3>
+                    @forelse ($clase['contenidos'] as $keyContenido => $contenido)
+                        <x-acordeon tipo="Contenido" :numero="$keyContenido + 1">
+
+                            <x-input
+                                wire:model.lazy="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.titulo"
+                                error="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.titulo"
+                                placeholder="Titulo..." label="Titulo" />
+
+
+                                <div class="box-entrada px-2 w-full mt-2">
+                                  <label class="block text-gray-700 text-sm font-bold mt-2">
+                                      Tipo de contenido
+                                  </label>
+                                  <div class="relative">
+                                    <select class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 w-full block box-entrada px-2 mt-2  rounded-md sm:text-sm border-gray-300" wire:model="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.cursos_contenido_tipo_id">
+                                      <option >Seleccione un tipo...</option>
+                                      @foreach ($tipos as $item)
+                                          <option value="{{ $item->id }}">{{ $item->titulo }}</option>
+                                      @endforeach
+                                    </select>
+                                  </div>
+
+                              </div>
+
+
+                            <x-input
+                                wire:model.lazy="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.subtitulo"
+                                error="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.subtitulo"
+                                placeholder="Subtitulo..." label="Subtitulo" />
+
+                            <x-textarea
+                                wire:model.lazy="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.detalle"
+                                error="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.detalle"
+                                label="Detalle" />
+
+                                <x-input
+                                wire:model.lazy="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.recurso"
+                                error="modulos.{{ $key }}.clases.{{ $keyClase }}.contenidos.{{ $keyContenido }}.recurso" placeholder="url..."
+                                label="Video" />
+
+
+                        </x-acordeon>
+                    @empty
+                        <x-no-hay />
+                    @endforelse
+                    <button type="button" class="bg-[#6b2b83] text-white p-2 rounded-lg leading-none mt-3"
+                        wire:click.difer="agregarContenido({{ $key }}, {{ $keyClase }})">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+
+                </x-acordeon>
+            @empty
+                <x-no-hay />
+            @endforelse
+            <button type="button" class="bg-[#6b2b83] text-white p-2 rounded-lg leading-none mt-3"
+                wire:click.difer="agregarClase({{ $key }})">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+
         </x-acordeon>
     @empty
         <x-no-hay />
@@ -115,4 +184,5 @@
         wire:click.difer="agregarModulo()">
         <i class="fa-solid fa-plus"></i>
     </button>
+
 </div>

@@ -7,8 +7,14 @@
 
     <div class="pb-12 font-acephimere">
         <div class="modulo relative w-full">
-            <img src="{{ url('/img/slider-principal-1.jpg') }}" alt="" class="w-full p-0 m-0">
-            <img src="{{ url('/img/slider-principal-2.jpg') }}" alt="" class="w-full p-0 m-0">
+          <div class="carusel-home-banner">
+            <div>
+              <img src="{{ url('/img/slider-principal-1.jpg') }}" alt="" class="w-full p-0 m-0">
+            </div>
+            <div>
+              <img src="{{ url('/img/slider-principal-2.jpg') }}" alt="" class="w-full p-0 m-0">
+            </div>
+          </div>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-1/2 absolute bottom-0 w-full left-1/2 -translate-x-2/4">
                 <div class="absolute w-1/2 h-3/4 bottom-0  ml-4 text-right ">
                     <h1 class="text-white text-7xl font-bold mb-4">#ElPasoXtra</h1>
@@ -16,15 +22,15 @@
                 </div>
             </div>
         </div>
-        <div class="modulo relative w-full flex flex-center flex-col pt-6">
+        <div class="modulo relative w-full flex flex-center flex-col pt-12">
             <div class="titulo size-30 text-[#80009d] mx-auto font-bold max-w-xl text-center">Estudia como si vieras una serie de Netﬂix con nuestros cursos más populares</div>
             <livewire:inicio />
-            <a class="descubrir-programas text-[#ff2d00] size-25 text-center font-bold hover:underline mt-5 mb-5" href="{{ route('curso.list') }}">
+            <a class="descubrir-programas text-[#ff2d00] text-[16px] text-center font-bold hover:underline mt-12 mb-5" href="{{ route('curso.list') }}">
                 Descubrir todos los programas
             </a>
         </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-1/2 pt-6">
-            <div class="temas flex w-full gap-2 items-center transition-all mt-5 text-right">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-1/2 pt-12">
+            <div class="temas flex w-full gap-2  transition-all text-right">
                 <div class="w-1/2 pr-4">
                     <h4 class="text-[#ff2d00] font-bold text-2xl mb-4" >1. Nuestras clases se adaptan a tu rutina</h4>
                     <div class="text-[#80009d] font-bold text-xl pl-6 mb-4">
@@ -54,7 +60,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-1/2 pt-6">
             <div class="temas flex w-full gap-2 items-center transition-all mt-5 text-left">
                 <div class="w-1/2 ">
-                    <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" width="480" height="300" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://player.vimeo.com/video/164597356?h=00aa27e410" width="480" height="300" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 </div>
                 <div class="w-1/2 pr-4">
                     <h4 class="text-[#ff2d00] font-bold text-2xl mb-4" >2. Aprende con los mejores</h4>
@@ -107,10 +113,10 @@
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-1/2 pt-6">
             <div class="flex w-full h-full">
-                <div class="w-3/5 bg-gray-300">
-                    <iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height:421px" frameborder="0" class="w-full h-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                <div class="w-[55%] bg-gray-300">
+                    <iframe src="https://player.vimeo.com/video/164597356?h=00aa27e410" style="width: 100%; height:421px" frameborder="0" class="w-full h-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <div class="w-2/5 bg-[#80009d]">
+                <div class="w-[45%] bg-[#80009d]">
                         <div class="text-white py-16 px-6 text-right" >
                             <div class="text-5xl font-bold">#ElPasoXtra</div>
                             <div class="italic mb-10">Los mayores emprendedores y directivos de éxito adoran nuestro método</div>
@@ -120,7 +126,7 @@
             </div>
         </div>
 
-        <div class="pt-6">
+        <div class="pt-20">
             <img src="/img/home-ayuda.jpg" alt="" class="w-full block p-0">
         </div>
 
@@ -133,22 +139,22 @@
             <div class="example-box">
                 <div class="carousel-multiple-items">
                     <div>
-                    <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                    <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/164597356?h=00aa27e410" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
                     </div>
                     <div>
-                      <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                      <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/164597356?h=00aa27e410" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
                       </div>
                       <div>
-                        <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                        <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/164597356?h=00aa27e410" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
                         </div>
                         <div>
-                          <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                          <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/164597356?h=00aa27e410" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
                           </div>
                           <div>
-                            <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                            <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/164597356?h=00aa27e410" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
                             </div>
                             <div>
-                              <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/73214621?h=e9e98919a7" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+                              <div class="box" style="height: 233px"><iframe src="https://player.vimeo.com/video/164597356?h=00aa27e410" style="width: 100%; height: 100%;" frameborder="0" class="w-full" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
                               </div>
                 </div>
                 </div>
