@@ -17,6 +17,10 @@ class Prod extends Seeder
      */
     public function run()
     {
+      TipoIdentificacion::insert([
+        [ 'nombre' => 'Cédula'],
+        [ 'nombre' => 'Pasaporte'],
+      ]);
       User::create([
         'name' => "ebonifaz",
         'slug' => "ebonifaz",
@@ -34,11 +38,6 @@ class Prod extends Seeder
         ['titulo' => "Video"],
         ['titulo' => "Descarga"],
         ['titulo' => "Texto"],
-      ]);
-
-      TipoIdentificacion::insert([
-        [ 'nombre' => 'Cédula'],
-        [ 'nombre' => 'Pasaporte'],
       ]);
     }
 }
