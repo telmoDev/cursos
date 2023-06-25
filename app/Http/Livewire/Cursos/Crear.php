@@ -28,6 +28,7 @@ class Crear extends Component
   public $clases = [];
   public $contenidos = [];
   public $maestros;
+  public $rutaArchivo;
 
   public $tipos=[];
 
@@ -57,8 +58,6 @@ class Crear extends Component
     $this->obtenerSyllaby();
     $this->maestros = User::where('maestro', true)->get();
     $this->tipos = ContenidoTipo::all();
-
-    // dd($this->modulos);
   }
 
   public function updated($name, $value)
@@ -81,12 +80,12 @@ class Crear extends Component
   function obtenerSyllaby()
   {
     $modulos = $this->curso->modulos()->get();
-
+    
     foreach ($modulos as $key => $value) {
       $this->modulos[$key] = $value;
       $this->modulos[$key]['clases'] = $value->clases()->get();
       foreach ($this->modulos[$key]['clases'] as $keyClase => $valueClase) {
-        $this->modulos[$key]['clases'][$keyClase][] = $valueClase->contenidos()->get();
+        $this->modulos[$key]['clases'][$keyClase]['contenidos'] = $valueClase->contenidos()->get();
       }
     }
   }
@@ -102,7 +101,6 @@ class Crear extends Component
 
   function borrarCaracteristica($key, $id = null)
   {
-    // dd($id);
     if (!empty($id)) {
       $caracteristica = CaracteristicaCurso::find($id);
       $caracteristica->delete();
@@ -169,11 +167,8 @@ class Crear extends Component
     $this->validate($this->rules, [
       'required' => 'El campo es requerido'
     ]);
-
-    $this->curso->imagen = empty($this->curso->imagen) ? $this->obtenerNombreImagen() : $this->curso->imagen;
-
+    $this->curso->imagen =  $this->obtenerNombreImagen();
     $this->curso->save();
-
     if ($this->nuevaImagen)
       $this->imagenCurso->storeAs("cursos/{$this->curso->id}", "{$this->curso->imagen}");
     foreach ($this->caracteristicas as $key => $value) {
@@ -204,7 +199,7 @@ class Crear extends Component
         );
         foreach ($valueClase['contenidos'] as $key => $valueContent) {
           // dd($valueContent['cursos_contenido_tipo_id']);
-          $clase = Contenido::updateOrCreate(
+          $contenido = Contenido::updateOrCreate(
             ['id' => $value['id']],
             [
               'titulo' => $valueContent['titulo'],
@@ -225,4 +220,11 @@ class Crear extends Component
     // redirect()->route('curso.editar', $this->curso->id);
     redirect()->route('curso.administrador');
   }
+
+  public function eliminarImagen()
+    {
+      if ($this->imagenCurso) {
+          $this->imagenCurso = null;
+      }
+    }
 }

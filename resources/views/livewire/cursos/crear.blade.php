@@ -8,14 +8,10 @@
         </a>
     </div>
     <form wire:submit.prevent="guardar">
-
+        @csrf
         <div class="shadow p-2 hover:border-2 hover:border-[#6b2b83]">
             {{-- Detalle del curso --}}
             @include('livewire.cursos._partes._form._crear.form_general')
-
-
-
-
         </div>
         {{-- Syllabus --}}
         {{-- @include('livewire.cursos._partes._form._crear.form_secciones') --}}

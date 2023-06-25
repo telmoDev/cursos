@@ -8,18 +8,27 @@ use Livewire\WithPagination;
 
 class Administrador extends Component
 {
+
     use WithPagination;
+    
+    public function reloadPage()
+    {
+        $this->emit('reloadPage');
+    }
 
     public function borrar($id)
     {
         $curso = Curso::find($id);
         $curso->delete();
+        $this->reloadPage();
     }
 
     public function render()
     {
+        $cursos = Curso::paginate(15);
         return view('livewire.cursos.administrador', [
-            'cursos' => Curso::paginate(15)
+            'cursos' => $cursos
         ]);
+        $this->refresh();   
     }
 }
